@@ -666,6 +666,16 @@ var userAgents = {
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 18.0,
+    },
+    "UNKNOWN BROWSER": {
+        CONDITION: {
+            USER_AGENT: "hoge foo bar piyo",
+        },
+        OS: "",
+        OS_VERSION: "0.0.0",
+        BROWSER: "",
+        BROWSER_ENGINE: "",
+        BROWSER_VERSION: "0.0.0"
     }
 };
 
