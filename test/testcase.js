@@ -38,7 +38,7 @@ var userAgents = {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
         },
-        OS: "OS X",
+        OS: "Mac",
         OS_VERSION: "10.8.5",
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
@@ -48,7 +48,7 @@ var userAgents = {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
         },
-        OS: "OS X",
+        OS: "Mac",
         OS_VERSION: "10.8.5",
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
@@ -58,7 +58,7 @@ var userAgents = {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
         },
-        OS: "OS X",
+        OS: "Mac",
         OS_VERSION: "10.8.5",
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
@@ -318,7 +318,7 @@ var userAgents = {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/536.30.1 (KHTML, like Gecko) Version/6.0.5 Safari/536.30.1",
         },
-        OS: "OS X",
+        OS: "Mac",
         OS_VERSION: 10.8,
         BROWSER: "Safari",
         BROWSER_ENGINE: "WebKit",
