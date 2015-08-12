@@ -1,0 +1,60 @@
+{
+  "name": "uupaa.useragent.js",
+  "version": "0.0.0",
+  "description": "Detect the OS, Browser and WebView from UserAgent String.",
+  "url": "https://github.com/uupaa/UserAgent.js",
+  "keywords": ["UserAgent", "WebView", "uupaa", "WebModule", "Unstable"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uupaa/UserAgent.js.git"
+  },
+  "scripts": {
+    "sync": "node ../WebModule/run/sync.js; npm update; node ../WebModule/run/page.js",
+    "wiki": "node ../WebModule/run/wiki.js",
+    "min": "node ../WebModule/run/minify.js --verbose --strict --keep --pretty",
+    "build": "node ../WebModule/run/minify.js --verbose --strict --keep --release",
+    "watch": "node ../WebModule/run/watch.js --verbose --run lint",
+    "page": "node ../WebModule/run/page.js --verbose",
+    "test": "npm run min; npm run node; npm run browser",
+    "node": "NODE_ENV=production NODE_PATH=lib node --harmony test/node.js",
+    "noded": "NODE_ENV=production NODE_PATH=lib node --debug-brk --harmony test/node.js",
+    "browser": "open http://localhost:8000/UserAgent.js/test/index.html",
+    "add-src": "node ../WebModule/run/add-src.js",
+    "sim": "node ../WebModule/run/sim.js http://localhost:8000/UserAgent.js/test/index.html",
+    "simx": "node ../WebModule/run/sim.js stop",
+    "lint": "eslint lib/*.js",
+    "score": "node ../WebModule/run/score.js; open lint/plato/index.html",
+    "patch": "node ../WebModule/run/patch.js",
+    "setup": "node ../WebModule/run/setup.js",
+    "start": "cd ../; Python -m SimpleHTTPServer 8000 &",
+    "stop": "killall -- Python -m SimpleHTTPServer 8000; exit 0"
+  },
+  "webmodule": {
+    "develop": false,
+    "label": ["@dev"],
+    "browser": {
+      "source": ["lib/UserAgent.js"],
+      "output": "release/UserAgent.b.min.js"
+    },
+    "worker": {
+      "source": ["lib/UserAgent.js"],
+      "output": "release/UserAgent.w.min.js"
+    },
+    "node": {
+      "source": ["lib/UserAgent.js"],
+      "output": "release/UserAgent.n.min.js"
+    },
+    "nw": {
+      "source": ["lib/UserAgent.js"],
+      "output": "release/UserAgent.nw.min.js"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "lib": "./lib/",
+  "main": "./index.js",
+  "author": "uupaa",
+  "license": "MIT",
+  "contributors": []
+}
+
