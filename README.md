@@ -23,6 +23,7 @@ var result = {
     BROWSER_ENGINE:   ua.BROWSER_ENGINE,
     BROWSER_VERSION:  ua.BROWSER_VERSION,
     USER_AGENT:       ua.USER_AGENT,
+    DEVICE:           ua.DEVICE,
     WEB_VIEW:         ua.WEB_VIEW,
     AOSP:             ua.AOSP,
     FULL_SCREEN:      _isFullScreenReady(),

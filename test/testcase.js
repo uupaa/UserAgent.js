@@ -43,6 +43,7 @@ var userAgents = {
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 31.0,
+        DEVICE: "",
     },
     Chrome: {
         CONDITION: {
@@ -53,6 +54,7 @@ var userAgents = {
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 31.0,
+        DEVICE: "",
     },
     Blink: {
         CONDITION: {
@@ -63,6 +65,7 @@ var userAgents = {
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 31.0,
+        DEVICE: "",
     },
     iPhone6Plus: {
         CONDITION: {
@@ -116,7 +119,7 @@ var userAgents = {
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: "27.0.1453",
-        DEVICE: "Nexus 7 2013",
+        DEVICE: "Nexus 7 2nd",
     },
     FirefoxMobileForAndroid: {
         CONDITION: {
@@ -126,6 +129,7 @@ var userAgents = {
         BROWSER: "Firefox",
         BROWSER_ENGINE: "Gecko",
         BROWSER_VERSION: 13.0,
+        DEVICE: "",
     },
     FirefoxOS: {
         CONDITION: {
@@ -134,6 +138,7 @@ var userAgents = {
         BROWSER: "Firefox",
         BROWSER_ENGINE: "Gecko",
         BROWSER_VERSION: 18.0,
+        DEVICE: "",
     },
     INFOBAR_A01: {
         CONDITION: {
@@ -156,7 +161,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 10.0,
-        DEVICE: "Lumia 520",
+        DEVICE: "",
     },
     WindowsPhoneLumia920: {
         CONDITION: {
@@ -167,7 +172,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 10.0,
-        DEVICE: "Lumia 920",
+        DEVICE: "",
     },
     Kindle: {
         CONDITION: {
@@ -202,6 +207,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 11.0,
+        DEVICE: "",
     },
     IE10: {
         CONDITION: {
@@ -212,6 +218,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 10.0,
+        DEVICE: "",
     },
     IE9: {
         CONDITION: {
@@ -222,6 +229,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 9.0,
+        DEVICE: "",
     },
     IE8: {
         CONDITION: {
@@ -232,6 +240,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 8.0,
+        DEVICE: "",
     },
     "WP7.5": {
         CONDITION: {
@@ -242,6 +251,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 9.0,
+        DEVICE: "",
     },
     WP7: {
         CONDITION: {
@@ -252,6 +262,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 7.0,
+        DEVICE: "",
     },
     OperaNext: {
         CONDITION: {
@@ -262,6 +273,7 @@ var userAgents = {
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 25.0,
+        DEVICE: "L-01D",
     },
     LGL25: {
         CONDITION: {
@@ -272,7 +284,7 @@ var userAgents = {
         BROWSER: "Firefox",
         BROWSER_ENGINE: "Gecko",
         BROWSER_VERSION: 32.0,
-        DEVICE: "LGL25",
+        DEVICE: "",
     },
     Firefox16: {
         CONDITION: {
@@ -283,6 +295,7 @@ var userAgents = {
         BROWSER: "Firefox",
         BROWSER_ENGINE: "Gecko",
         BROWSER_VERSION: 16.0,
+        DEVICE: "",
     },
     Firefox11: {
         CONDITION: {
@@ -293,6 +306,7 @@ var userAgents = {
         BROWSER: "Firefox",
         BROWSER_ENGINE: "Gecko",
         BROWSER_VERSION: 11.0,
+        DEVICE: "",
     },
     FirefoxMobile: {
         CONDITION: {
@@ -303,6 +317,7 @@ var userAgents = {
         BROWSER: "Firefox",
         BROWSER_ENGINE: "Gecko",
         BROWSER_VERSION: 13.0,
+        DEVICE: "",
     },
     FirefoxTablet: {
         CONDITION: {
@@ -313,6 +328,7 @@ var userAgents = {
         BROWSER: "Firefox",
         BROWSER_ENGINE: "Gecko",
         BROWSER_VERSION: 13.0,
+        DEVICE: "",
     },
     Safari6: {
         CONDITION: {
@@ -323,6 +339,7 @@ var userAgents = {
         BROWSER: "Safari",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 6.0,
+        DEVICE: "",
     },
     "Android Browser": {
         CONDITION: {
@@ -335,6 +352,7 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 4.0,
         AOSP: true,
+        DEVICE: "SOL23",
     },
     "Android Browser WebView": {
         CONDITION: {
@@ -347,6 +365,7 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 4.0,
         AOSP: true,
+        DEVICE: "",
     },
     "S Browser": {
         CONDITION: {
@@ -358,6 +377,7 @@ var userAgents = {
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 18.0,
+        DEVICE: "SC-04E",
     },
     "Android KitKat Chrome WebView": {
         CONDITION: {
@@ -369,6 +389,7 @@ var userAgents = {
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 30.0,
+        DEVICE: "Nexus 5",
     },
     "Kindle": {
         CONDITION: {
@@ -380,17 +401,20 @@ var userAgents = {
         BROWSER: "AOSP",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 3.4,
+        DEVICE: "KFTT",
     },
     "Nexus7 Android 4.2 Chrome 18": {
         CONDITION: {
+            DISPLAY_DPR: 1.333,
             USER_AGENT: "Mozilla/5.0 (Linux; Android 4.2; Nexus 7 Build/JOP40C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Safari/535.19",
-            //                               ~~~~~~~~~~~  ~~~~~~  ~~~~~                                                ~~~~~~~~~~~         |(not Mobile)
+            //                               ~~~~~~~~~~~  ~~~~~~~ ~~~~~                                                ~~~~~~~~~~~         |(not Mobile)
         },
         OS: "Android",
         OS_VERSION: 4.2,
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 18.0,
+        DEVICE: "Nexus 7",
     },
     "Xperia X10": {
         CONDITION: {
@@ -401,36 +425,50 @@ var userAgents = {
         BROWSER: "AOSP",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 3.1,
+        DEVICE: "X10i",
     },
     "iPhone 5 iOS 7 beta 6": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/6.0 Mobile/11A4449d Safari/9537.53.25",
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 IMGSGX543-113.3)",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 568,
+            DISPLAY_SHORT: 1,
         },
         OS: "iOS",
         OS_VERSION: 7.0,
         BROWSER: "Safari",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 6.0,
+        DEVICE: "iPhone 5",
     },
     "iPhone 4s iOS 7.0.3": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_3 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11B511 Safari/9537.53",
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 IMGSGX543-113.3)",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 480,
+            DISPLAY_SHORT: 1,
         },
         OS: "iOS",
         OS_VERSION: 7.0,
         BROWSER: "Safari",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
+        DEVICE: "iPhone 4s",
     },
     "iPad 2 iOS 6 beta": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B176 Safari/7534.48.3",
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 IMGSGX543-113.3)",
+            DISPLAY_DPR: 1,
         },
         OS: "iOS",
         OS_VERSION: 5.1,
         BROWSER: "Safari",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 5.1,
+        DEVICE: "iPad 2",
     },
     "Xbox One": {
         CONDITION: {
@@ -442,6 +480,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 10.0,
+        DEVICE: "",
     },
     "Xbox 360": { // IEMobile Based Browser.
         CONDITION: {
@@ -453,6 +492,7 @@ var userAgents = {
         BROWSER: "IE",
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 9.0,
+        DEVICE: "",
     },
     "PS 4": { // WebKit Based Browser.
         CONDITION: {
@@ -464,6 +504,7 @@ var userAgents = {
         BROWSER: "WebKit",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 536.26,
+        DEVICE: "",
     },
     "PS 3(WebKit)": { // WebKit Based Browser.
         CONDITION: {
@@ -475,6 +516,7 @@ var userAgents = {
         BROWSER: "WebKit",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 531.22,
+        DEVICE: "",
     },
     "PS 3": { // Sony Original Browser.
         CONDITION: {
@@ -486,6 +528,7 @@ var userAgents = {
         BROWSER: "",
         BROWSER_ENGINE: "",
         BROWSER_VERSION: 0.0,
+        DEVICE: "",
     },
     "PS 2": { // NetFront Based Browser.
         CONDITION: {
@@ -496,6 +539,7 @@ var userAgents = {
         BROWSER: "",
         BROWSER_ENGINE: "",
         BROWSER_VERSION: 0.0,
+        DEVICE: "",
     },
     "PSP": { // NetFront Based Browser.
         CONDITION: {
@@ -506,6 +550,7 @@ var userAgents = {
         BROWSER: "",
         BROWSER_ENGINE: "",
         BROWSER_VERSION: 0.0,
+        DEVICE: "",
     },
     "PS Vita": { // WebKit Based Browser.
         CONDITION: {
@@ -516,6 +561,7 @@ var userAgents = {
         BROWSER: "WebKit",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 531.22,
+        DEVICE: "",
     },
     "Wii": { // Opera Browser.
         CONDITION: {
@@ -527,6 +573,7 @@ var userAgents = {
         BROWSER: "",
         BROWSER_ENGINE: "",
         BROWSER_VERSION: 0.0,
+        DEVICE: "",
     },
     "Wii U": { // NetFrontNX Browser.
         CONDITION: {
@@ -537,6 +584,7 @@ var userAgents = {
         BROWSER: "WebKit",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 536.28,
+        DEVICE: "",
     },
     "3DS": { // NetFront Based Browser.
         CONDITION: {
@@ -548,6 +596,7 @@ var userAgents = {
         BROWSER: "",
         BROWSER_ENGINE: "",
         BROWSER_VERSION: 0.0,
+        DEVICE: "",
     },
     "ChromeOS": {
         CONDITION: {
@@ -557,13 +606,18 @@ var userAgents = {
         OS_VERSION: "0.0.0",
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
-      //BROWSER_VERSION:
+        BROWSER_VERSION: "30.0.1599",
+        DEVICE: "",
     },
     "iPhone4s WebView Facebook": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12H143 [FBAN/FBIOS;FBAV/36.1.0.43.231;FBBV/13557860;FBDV/iPhone4,1;FBMD/iPhone;FBSN/iPhone OS;FBSV/8.4;FBSS/2; FBCR/ソフトバンクモバイル;FBID/phone;FBLC/ja_JP;FBOP/5]",
             FULL_SCREEN: false,
             FILE_SYSTEM: false,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 IMGSGX543-113.3)",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 480,
+            DISPLAY_SHORT: 1,
         },
         OS: "iOS",
         OS_VERSION: 8.4,
@@ -571,12 +625,17 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
       //BROWSER_VERSION:
         WEB_VIEW: true,
+        DEVICE: "iPhone 4s",
     },
     "iPhone4s WebView Twitter": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12H143 Twitter for iPhone",
             FULL_SCREEN: false,
             FILE_SYSTEM: false,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 IMGSGX543-113.3)",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 480,
+            DISPLAY_SHORT: 1,
         },
         OS: "iOS",
         OS_VERSION: 8.4,
@@ -584,12 +643,17 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
       //BROWSER_VERSION:
         WEB_VIEW: true,
+        DEVICE: "iPhone 4s",
     },
     "iPhone4s WebView Line": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12H143 Safari Line/5.2.1",
             FULL_SCREEN: false,
             FILE_SYSTEM: false,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 IMGSGX543-113.3)",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 480,
+            DISPLAY_SHORT: 1,
         },
         OS: "iOS",
         OS_VERSION: 8.4,
@@ -597,6 +661,7 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
       //BROWSER_VERSION:
         WEB_VIEW: true,
+        DEVICE: "iPhone 4s",
     },
     "HTV31 Android 5.0.2 Facebook": {
         CONDITION: {
@@ -610,6 +675,7 @@ var userAgents = {
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 44.0,
         WEB_VIEW: true,
+        DEVICE: "HTV31",
     },
     "HTC23 Android 4.4.4 Chromium WebView": {
         CONDITION: {
@@ -623,6 +689,7 @@ var userAgents = {
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: "33.0.0",
         WEB_VIEW: true,
+        DEVICE: "HTL23",
     },
     "Nexus 5 Android 4.4 Chromium WebView": {
         CONDITION: {
@@ -636,6 +703,7 @@ var userAgents = {
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: "30.0.0",
         WEB_VIEW: true,
+        DEVICE: "Nexus 5",
     },
     "SC-04E Android 4.2.2 S Browser": {
         CONDITION: {
@@ -646,6 +714,7 @@ var userAgents = {
         BROWSER: "Chrome", // S Browser
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 18.0,
+        DEVICE: "SC-04E",
     },
     "HTL21 Android 4.1.1 Chrome": {
         CONDITION: {
@@ -656,16 +725,19 @@ var userAgents = {
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 33.0,
+        DEVICE: "HTL21",
     },
     "Nexus 7 Android 4.2 Chrome": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Linux; Android 4.2; Nexus 7 Build/JOP40C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Safari/535.19",
+            DISPLAY_DPR: 1.333,
         },
         OS: "Android",
         OS_VERSION: 4.2,
         BROWSER: "Chrome",
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 18.0,
+        DEVICE: "Nexus 7",
     },
     "UNKNOWN BROWSER": {
         CONDITION: {
@@ -675,17 +747,25 @@ var userAgents = {
         OS_VERSION: "0.0.0",
         BROWSER: "",
         BROWSER_ENGINE: "",
-        BROWSER_VERSION: "0.0.0"
+        BROWSER_VERSION: "0.0.0",
+        DEVICE: "",
     }
 };
 
 // --- test cases ------------------------------------------
 function testUserAgent(test, pass, miss) {
     var result = true;
+    var defaultWEBGL_VERSION = WebGLDetector.WEBGL_VERSION;
 
     for (var key in userAgents) {
         var item = userAgents[key];
         var condition = item.CONDITION;
+
+        if ("WEBGL_VERSION" in condition) {
+            WebGLDetector.WEBGL_VERSION = condition.WEBGL_VERSION;
+        } else {
+            WebGLDetector.WEBGL_VERSION = defaultWEBGL_VERSION;
+        }
 
         var browser = new UserAgent(condition.USER_AGENT, condition);
 
@@ -733,6 +813,13 @@ function testUserAgent(test, pass, miss) {
                     test.done(miss());
                     return;
                 }
+            }
+        }
+        if ("DEVICE" in item) {
+            if (item.DEVICE !== browser.DEVICE) {
+                console.log("DEVICE", item.DEVICE, browser.DEVICE);
+                test.done(miss());
+                return;
             }
         }
         if ("WEB_VIEW" in item) {

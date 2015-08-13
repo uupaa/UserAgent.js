@@ -17,7 +17,7 @@ onmessage = function(event) {
     //publish to global. eg: window.WebModule.Class -> window.Class
     WebModule.publish = true;
 
-    
+    importScripts("../node_modules/uupaa.webgldetector.js/lib/WebGLDetector.js");
     importScripts("wmtools.js");
     importScripts("../lib/UserAgent.js");
     importScripts("../release/UserAgent.w.min.js");
