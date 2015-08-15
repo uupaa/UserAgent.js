@@ -17,6 +17,7 @@ var test = new Test("UserAgent", {
         }
     }).add([
         testUserAgent,
+        testUserAgent_LANGUAGE,
     ]);
 
 if (IN_BROWSER || IN_NW) {
@@ -838,6 +839,16 @@ function testUserAgent(test, pass, miss) {
         }
     }
     test.done(pass());
+}
+
+function testUserAgent_LANGUAGE(test, pass, miss) {
+    var ua = new UserAgent();
+
+    if (ua.LANGUAGE) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
 }
 
 return test.run();

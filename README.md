@@ -23,24 +23,28 @@ var result = {
     BROWSER_ENGINE:   ua.BROWSER_ENGINE,
     BROWSER_VERSION:  ua.BROWSER_VERSION,
     USER_AGENT:       ua.USER_AGENT,
-    DEVICE:           ua.DEVICE,
+    LANGUAGE:         ua.LANGUAGE,
     WEB_VIEW:         ua.WEB_VIEW,
+    DEVICE:           ua.DEVICE,
     AOSP:             ua.AOSP,
-    FULL_SCREEN:      _isFullScreenReady(),
-    FILE_SYSTEM:      _isFileSystemReady(),
 };
 
-document.body.innerHTML += JSON.stringify(result, null, 2).replace(/\n/g, "<br>");
+console.dir(result);
 
-function _isFullScreenReady() {
-    return "fullscreenEnabled"       in document ||
-           "webkitFullscreenEnabled" in document || false;
+/*
+{
+  "OS": "Mac",
+  "OS_VERSION": "10.9.5",
+  "BROWSER": "Chrome",
+  "BROWSER_ENGINE": "Blink",
+  "BROWSER_VERSION": "44.0.2403",
+  "USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36",
+  "LANGUAGE": "en",
+  "WEB_VIEW": false,
+  "DEVICE": "",
+  "AOSP": false
 }
-
-function _isFileSystemReady() {
-    return "requestFileSystem"       in window ||
-           "webkitRequestFileSystem" in window || false;
-}
+ */
 </script>
 ```
 
