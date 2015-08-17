@@ -17,6 +17,7 @@ var test = new Test("UserAgent", {
         }
     }).add([
         testUserAgent,
+        testUserAgent_manyCases,
         testUserAgent_LANGUAGE,
     ]);
 
@@ -99,8 +100,7 @@ var userAgents = {
     "Nexus5 Android 4.4 Chromium based WebView": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36",
-            FULL_SCREEN: false,
-            FILE_SYSTEM: false,
+            WEB_VIEW: false,
         },
         OS: "Android",
         OS_VERSION: 4.4,
@@ -613,8 +613,7 @@ var userAgents = {
     "iPhone4s WebView Facebook": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12H143 [FBAN/FBIOS;FBAV/36.1.0.43.231;FBBV/13557860;FBDV/iPhone4,1;FBMD/iPhone;FBSN/iPhone OS;FBSV/8.4;FBSS/2; FBCR/ソフトバンクモバイル;FBID/phone;FBLC/ja_JP;FBOP/5]",
-            FULL_SCREEN: false,
-            FILE_SYSTEM: false,
+            WEB_VIEW: true,
             WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 IMGSGX543-113.3)",
             DISPLAY_DPR: 2,
             DISPLAY_LONG: 480,
@@ -631,8 +630,7 @@ var userAgents = {
     "iPhone4s WebView Twitter": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12H143 Twitter for iPhone",
-            FULL_SCREEN: false,
-            FILE_SYSTEM: false,
+            WEB_VIEW: true,
             WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 IMGSGX543-113.3)",
             DISPLAY_DPR: 2,
             DISPLAY_LONG: 480,
@@ -649,8 +647,7 @@ var userAgents = {
     "iPhone4s WebView Line": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12H143 Safari Line/5.2.1",
-            FULL_SCREEN: false,
-            FILE_SYSTEM: false,
+            WEB_VIEW: true,
             WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 IMGSGX543-113.3)",
             DISPLAY_DPR: 2,
             DISPLAY_LONG: 480,
@@ -667,8 +664,7 @@ var userAgents = {
     "HTV31 Android 5.0.2 Facebook": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Linux; Android 5.0.2; HTV31 Build/LRX22G; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/44.0.2403.90 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/40.0.0.24.199;]",
-            FULL_SCREEN: false,
-            FILE_SYSTEM: false,
+            WEB_VIEW: true,
         },
         OS: "Android",
         OS_VERSION: "5.0.2",
@@ -681,8 +677,7 @@ var userAgents = {
     "HTC23 Android 4.4.4 Chromium WebView": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Linux; Android 4.4.4; HTL23 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/33.0.0.0 Mobile Safari/537.36",
-            FULL_SCREEN: false,
-            FILE_SYSTEM: false,
+            WEB_VIEW: true,
         },
         OS: "Android",
         OS_VERSION: "4.4.4",
@@ -695,8 +690,7 @@ var userAgents = {
     "Nexus 5 Android 4.4 Chromium WebView": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36",
-            FULL_SCREEN: false,
-            FILE_SYSTEM: false,
+            WEB_VIEW: true,
         },
         OS: "Android",
         OS_VERSION: 4.4,
@@ -755,8 +749,31 @@ var userAgents = {
 
 // --- test cases ------------------------------------------
 function testUserAgent(test, pass, miss) {
-    var result = true;
+    WebGLDetector.detect();
+
     var defaultWEBGL_VERSION = WebGLDetector.WEBGL_VERSION;
+
+    var ua = new UserAgent();
+
+    if (global["document"]) {
+        document.body.innerHTML += JSON.stringify(ua, null, 2).replace(/\n/g, "<br>");
+        var api = {
+            "fullscreenEnabled":       "" + document["fullscreenEnabled"],
+            "webkitFullscreenEnabled": "" + document["webkitFullscreenEnabled"],
+            "requestFileSystem":       "" + global["requestFileSystem"],
+            "webkitRequestFileSystem": "" + global["webkitRequestFileSystem"],
+        };
+        document.body.innerHTML += JSON.stringify(api, null, 2).replace(/\n/g, "<br>");
+
+    }
+    test.done(pass());
+}
+
+function testUserAgent_manyCases(test, pass, miss) {
+    WebGLDetector.detect();
+
+    var defaultWEBGL_VERSION = WebGLDetector.WEBGL_VERSION;
+    var result = true;
 
     for (var key in userAgents) {
         var item = userAgents[key];
@@ -838,6 +855,9 @@ function testUserAgent(test, pass, miss) {
             }
         }
     }
+
+    WebGLDetector.WEBGL_VERSION = defaultWEBGL_VERSION;
+
     test.done(pass());
 }
 
