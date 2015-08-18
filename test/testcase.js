@@ -751,8 +751,6 @@ var userAgents = {
 function testUserAgent(test, pass, miss) {
     WebGLDetector.detect();
 
-    var defaultWEBGL_VERSION = WebGLDetector.WEBGL_VERSION;
-
     var ua = new UserAgent();
 
     if (global["document"]) {
@@ -762,6 +760,9 @@ function testUserAgent(test, pass, miss) {
             "webkitFullscreenEnabled": "" + document["webkitFullscreenEnabled"],
             "requestFileSystem":       "" + global["requestFileSystem"],
             "webkitRequestFileSystem": "" + global["webkitRequestFileSystem"],
+            "WebGLDetector.WEBGL_CONTEXT": "" + WebGLDetector.WEBGL_CONTEXT,
+            "WebGLDetector.WEBGL_VERSION": "" + WebGLDetector.WEBGL_VERSION,
+            "WebGLDetector.MAX_TEXTURE_SIZE": "" + WebGLDetector.MAX_TEXTURE_SIZE,
         };
         document.body.innerHTML += JSON.stringify(api, null, 2).replace(/\n/g, "<br>");
 
