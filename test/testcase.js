@@ -17,6 +17,7 @@ var test = new Test("UserAgent", {
         }
     }).add([
         testUserAgent,
+        testUserAgent_shorthands,
         testUserAgent_manyCases,
         testUserAgent_LANGUAGE,
     ]);
@@ -770,9 +771,21 @@ function testUserAgent(test, pass, miss) {
     test.done(pass());
 }
 
-function testUserAgent_manyCases(test, pass, miss) {
-    WebGLDetector.detect();
+function testUserAgent_shorthands(test, pass, miss) {
+    var iPhone6 = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25";
+    var Nexus5  = "Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36";
 
+    var ua1 = new UserAgent(iPhone6);
+    var ua2 = new UserAgent(Nexus5);
+
+    if (ua1.iOS && ua2.Android) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_manyCases(test, pass, miss) {
     var defaultWEBGL_VERSION = WebGLDetector.WEBGL_VERSION;
     var result = true;
 

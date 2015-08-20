@@ -27,6 +27,9 @@ var result = {
     WEB_VIEW:         ua.WEB_VIEW,
     DEVICE:           ua.DEVICE,
     AOSP:             ua.AOSP,
+    // --- shorthand ---
+    iOS               ua.iOS,
+    Android           ua.Android,
 };
 
 console.dir(result);
@@ -42,7 +45,9 @@ console.dir(result);
   "LANGUAGE": "en",
   "WEB_VIEW": false,
   "DEVICE": "",
-  "AOSP": false
+  "AOSP": false,
+  "iOS": false,
+  "Android": false,
 }
  */
 </script>
