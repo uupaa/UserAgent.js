@@ -20,6 +20,7 @@ var test = new Test("UserAgent", {
         testUserAgent_shorthands,
         testUserAgent_manyCases,
         testUserAgent_LANGUAGE,
+        testUserAgent_genericGetterAndSetter,
     ]);
 
 if (IN_BROWSER || IN_NW) {
@@ -879,6 +880,16 @@ function testUserAgent_LANGUAGE(test, pass, miss) {
     var ua = new UserAgent();
 
     if (ua.LANGUAGE) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_genericGetterAndSetter(test, pass, miss) {
+    var ua = new UserAgent();
+
+    if (ua.get("LANGUAGE")) {
         test.done(pass());
     } else {
         test.done(miss());
