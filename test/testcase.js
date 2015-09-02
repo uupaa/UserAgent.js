@@ -888,9 +888,11 @@ function testUserAgent_LANGUAGE(test, pass, miss) {
 }
 
 function testUserAgent_MOBILE(test, pass, miss) {
-    var ua = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua2 = new UserAgent("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
 
-    if (ua.MOBILE) {
+    if (ua1.MOBILE && ua2.MOBILE && ua3.MOBILE) {
         test.done(pass());
     } else {
         test.done(miss());
