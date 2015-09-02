@@ -21,7 +21,8 @@ var test = new Test("UserAgent", {
         testUserAgent_manyCases,
         testUserAgent_LANGUAGE,
         testUserAgent_MOBILE,
-        testUserAgent_genericAccessorForES3,
+        testUserAgent_genericAccessor,
+        testUserAgent_ES,
     ]);
 
 if (IN_BROWSER || IN_NW) {
@@ -899,12 +900,22 @@ function testUserAgent_MOBILE(test, pass, miss) {
     }
 }
 
-function testUserAgent_genericAccessorForES3(test, pass, miss) {
+function testUserAgent_genericAccessor(test, pass, miss) {
     var ua = new UserAgent();
 
     ua.set("LANGUAGE", "hoge");
 
     if (ua.get("LANGUAGE") === "hoge") {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_ES(test, pass, miss) {
+    var ua = new UserAgent();
+
+    if ("ES5" in ua && "ES6" in ua) {
         test.done(pass());
     } else {
         test.done(miss());
