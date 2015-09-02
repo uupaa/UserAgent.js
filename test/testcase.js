@@ -20,7 +20,8 @@ var test = new Test("UserAgent", {
         testUserAgent_shorthands,
         testUserAgent_manyCases,
         testUserAgent_LANGUAGE,
-        testUserAgent_genericGetterAndSetter,
+        testUserAgent_MOBILE,
+        testUserAgent_genericAccessorForES3,
     ]);
 
 if (IN_BROWSER || IN_NW) {
@@ -886,10 +887,22 @@ function testUserAgent_LANGUAGE(test, pass, miss) {
     }
 }
 
-function testUserAgent_genericGetterAndSetter(test, pass, miss) {
+function testUserAgent_MOBILE(test, pass, miss) {
+    var ua = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+
+    if (ua.MOBILE) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_genericAccessorForES3(test, pass, miss) {
     var ua = new UserAgent();
 
-    if (ua.get("LANGUAGE")) {
+    ua.set("LANGUAGE", "hoge");
+
+    if (ua.get("LANGUAGE") === "hoge") {
         test.done(pass());
     } else {
         test.done(miss());
