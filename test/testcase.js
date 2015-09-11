@@ -73,6 +73,77 @@ var userAgents = {
         BROWSER_VERSION: 31.0,
         DEVICE: "",
     },
+    iPhone6sPlus: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 3,
+            DISPLAY_LONG: 736,
+            DISPLAY_SHORT: 414,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)",
+        },
+        OS: "iOS",
+        OS_VERSION: 9.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPhone 6s Plus"
+    },
+    iPhone6s: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 667,
+            DISPLAY_SHORT: 375,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)",
+        },
+        OS: "iOS",
+        OS_VERSION: 9.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPhone 6s",
+    },
+    iPadPro: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 1366,
+            DISPLAY_SHORT: 1024,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)"
+        },
+        OS: "iOS",
+        OS_VERSION: 9.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPad Pro",
+    },
+    iPadMini4: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A8 GPU - 50.6.10)"
+        },
+        OS: "iOS",
+        OS_VERSION: 9.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPad mini 4",
+    },
+    iPadAir2: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A8X GPU - 50.6.10)",
+        },
+        OS: "iOS",
+        OS_VERSION: 8.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 6.0,
+        DEVICE: "iPad Air 2",
+    },
     iPhone6Plus: {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25",

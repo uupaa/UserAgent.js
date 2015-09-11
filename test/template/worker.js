@@ -14,7 +14,7 @@ onmessage = function(event) {
 
     importScripts("../lib/WebModule.js");
 
-    //publish to global. eg: window.WebModule.Class -> window.Class
+    // publish to global
     WebModule.publish = true;
 
     __MODULES__
