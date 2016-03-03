@@ -1,21 +1,24 @@
 var ModuleTestUserAgent = (function(global) {
 
-global["BENCHMARK"] = false;
-
-var test = new Test("UserAgent", {
+var test = new Test(["UserAgent"], { // Add the ModuleName to be tested here (if necessary).
         disable:    false, // disable all tests.
         browser:    true,  // enable browser test.
         worker:     true,  // enable worker test.
         node:       true,  // enable node test.
         nw:         true,  // enable nw.js test.
+        el:         true,  // enable electron (render process) test.
         button:     true,  // show button.
         both:       true,  // test the primary and secondary modules.
         ignoreError:false, // ignore error.
         callback:   function() {
         },
         errorback:  function(error) {
+            console.error(error.message);
         }
-    }).add([
+    });
+
+if (IN_BROWSER || IN_NW || IN_EL || IN_WORKER || IN_NODE) {
+    test.add([
         testUserAgent,
         testUserAgent_shorthands,
         testUserAgent_manyCases,
@@ -23,19 +26,7 @@ var test = new Test("UserAgent", {
         testUserAgent_MOBILE,
         testUserAgent_genericAccessor,
         testUserAgent_ES,
-    ]);
-
-if (IN_BROWSER || IN_NW) {
-    test.add([
-        // browser and node-webkit test
-    ]);
-} else if (IN_WORKER) {
-    test.add([
-        // worker test
-    ]);
-} else if (IN_NODE) {
-    test.add([
-        // node.js and io.js test
+        testUserAgent_manyCases,
     ]);
 }
 
@@ -150,6 +141,7 @@ var userAgents = {
             DISPLAY_DPR: 3,
             DISPLAY_LONG: 736,
             DISPLAY_SHORT: 414,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A8 GPU - 50.6.10)",
         },
         OS: "iOS",
         OS_VERSION: 8.0,
@@ -164,6 +156,7 @@ var userAgents = {
             DISPLAY_DPR: 2,
             DISPLAY_LONG: 667,
             DISPLAY_SHORT: 375,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A8 GPU - 50.6.10)",
         },
         OS: "iOS",
         OS_VERSION: 8.0,
@@ -819,7 +812,102 @@ var userAgents = {
         BROWSER_ENGINE: "",
         BROWSER_VERSION: "0.0.0",
         DEVICE: "",
-    }
+    },
+    // "iPhone 6 Plus" + zoom -> "iPhone 6"
+    iPhone6Plus: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 3,
+          //DISPLAY_LONG: 736,
+            DISPLAY_LONG: 667,
+          //DISPLAY_SHORT: 414,
+            DISPLAY_SHORT: 375,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A8 GPU - 50.6.10)",
+            ZOOM: true,
+        },
+        OS: "iOS",
+        OS_VERSION: 8.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 6.0,
+      //DEVICE: "iPhone 6 Plus"
+        DEVICE: "iPhone 6"
+    },
+    // "iPhone 6" + zoom -> "iPhone 6"
+    iPhone6: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+          //DISPLAY_LONG: 667,
+            DISPLAY_LONG: 568,
+          //DISPLAY_SHORT: 375,
+            DISPLAY_SHORT: 320,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A8 GPU - 50.6.10)",
+            ZOOM: true,
+        },
+        OS: "iOS",
+        OS_VERSION: 8.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 6.0,
+      //DEVICE: "iPhone 6",
+        DEVICE: "iPhone 6"
+    },
+    // "iPhone 6s Plus" + zoom -> "iPhone 6s"
+    iPhone6sPlus: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 3,
+          //DISPLAY_LONG: 736,
+            DISPLAY_LONG: 667,
+          //DISPLAY_SHORT: 414,
+            DISPLAY_SHORT: 375,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)",
+            ZOOM: true,
+        },
+        OS: "iOS",
+        OS_VERSION: 9.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+      //DEVICE: "iPhone 6s Plus"
+        DEVICE: "iPhone 6s"
+    },
+    // "iPhone 6s" + zoom -> "iPhone 5se"
+    iPhone6s: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+          //DISPLAY_LONG: 667,
+            DISPLAY_LONG: 568,
+          //DISPLAY_SHORT: 375,
+            DISPLAY_SHORT: 320,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)",
+            ZOOM: true,
+        },
+        OS: "iOS",
+        OS_VERSION: 9.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+      //DEVICE: "iPhone 6s",
+        DEVICE: "iPhone 5se"
+    },
+    iPhone5se: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 568,
+            DISPLAY_SHORT: 320,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)",
+        },
+        OS: "iOS",
+        OS_VERSION: 9.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPhone 5se",
+    },
 };
 
 // --- test cases ------------------------------------------
@@ -868,39 +956,41 @@ function testUserAgent_manyCases(test, pass, miss) {
         var condition = item.CONDITION;
 
         if ("WEBGL_VERSION" in condition) {
+            WebGLDetector.DETECTED = true;
             WebGLDetector.WEBGL_VERSION = condition.WEBGL_VERSION;
         } else {
+            WebGLDetector.DETECTED = false;
             WebGLDetector.WEBGL_VERSION = defaultWEBGL_VERSION;
         }
 
-        var browser = new UserAgent(condition.USER_AGENT, condition);
+        var detected = new UserAgent(condition.USER_AGENT, condition);
 
         console.log(key);
 
         if ("OS" in item) {
-            if (item.OS !== browser.OS) {
-                console.log("OS", item.OS, browser.OS);
+            if (item.OS !== detected.OS) {
+                console.log("OS", item.OS, detected.OS);
                 test.done(miss());
                 return
             }
         }
         if ("BROWSER" in item) {
-            if (item.BROWSER !== browser.BROWSER) {
-                console.log("BROWSER", item.BROWSER, browser.BROWSER);
+            if (item.BROWSER !== detected.BROWSER) {
+                console.log("BROWSER", item.BROWSER, detected.BROWSER);
                 test.done(miss());
                 return;
             }
         }
         if ("OS_VERSION" in item) {
             if (typeof item.OS_VERSION === "string") {
-                if (item.OS_VERSION !== browser.OS_VERSION) {
-                    console.log("OS_VERSION", item.OS_VERSION, browser.OS_VERSION);
+                if (item.OS_VERSION !== detected.OS_VERSION) {
+                    console.log("OS_VERSION", item.OS_VERSION, detected.OS_VERSION);
                     test.done(miss());
                     return;
                 }
             } else if (typeof item.OS_VERSION === "number") {
-                if (parseFloat(item.OS_VERSION) !== parseFloat(browser.OS_VERSION)) {
-                    console.log("OS_VERSION", item.OS_VERSION, browser.OS_VERSION);
+                if (parseFloat(item.OS_VERSION) !== parseFloat(detected.OS_VERSION)) {
+                    console.log("OS_VERSION", item.OS_VERSION, detected.OS_VERSION);
                     test.done(miss());
                     return;
                 }
@@ -908,36 +998,37 @@ function testUserAgent_manyCases(test, pass, miss) {
         }
         if ("BROWSER_VERSION" in item) {
             if (typeof item.BROWSER_VERSION === "string") {
-                if (item.BROWSER_VERSION !== browser.BROWSER_VERSION) {
-                    console.log("BROWSER_VERSION", item.BROWSER_VERSION, browser.BROWSER_VERSION);
+                if (item.BROWSER_VERSION !== detected.BROWSER_VERSION) {
+                    console.log("BROWSER_VERSION", item.BROWSER_VERSION, detected.BROWSER_VERSION);
                     test.done(miss());
                     return;
                 }
             } else if (typeof item.BROWSER_VERSION === "number") {
-                if (parseFloat(item.BROWSER_VERSION) !== parseFloat(browser.BROWSER_VERSION)) {
-                    console.log("BROWSER_VERSION", item.BROWSER_VERSION, browser.BROWSER_VERSION);
+                if (parseFloat(item.BROWSER_VERSION) !== parseFloat(detected.BROWSER_VERSION)) {
+                    console.log("BROWSER_VERSION", item.BROWSER_VERSION, detected.BROWSER_VERSION);
                     test.done(miss());
                     return;
                 }
             }
         }
         if ("DEVICE" in item) {
-            if (item.DEVICE !== browser.DEVICE) {
-                console.log("DEVICE", item.DEVICE, browser.DEVICE);
+            if (item.DEVICE !== detected.DEVICE) {
+                console.log("DEVICE", item.DEVICE, detected.DEVICE);
+                debugger;
                 test.done(miss());
                 return;
             }
         }
         if ("WEB_VIEW" in item) {
-            if (item.WEB_VIEW !== browser.WEB_VIEW) {
-                console.log("WEB_VIEW", item.WEB_VIEW, browser.WEB_VIEW);
+            if (item.WEB_VIEW !== detected.WEB_VIEW) {
+                console.log("WEB_VIEW", item.WEB_VIEW, detected.WEB_VIEW);
                 test.done(miss());
                 return;
             }
         }
         if ("AOSP" in item) {
-            if (item.AOSP !== browser.AOSP) {
-                console.log("AOSP", item.AOSP, browser.AOSP);
+            if (item.AOSP !== detected.AOSP) {
+                console.log("AOSP", item.AOSP, detected.AOSP);
                 test.done(miss());
                 return;
             }

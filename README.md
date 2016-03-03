@@ -4,10 +4,14 @@
 
 Detect the OS, Browser and WebView from UserAgent String.
 
-- Please refer to [Spec](https://github.com/uupaa/UserAgent.js/wiki/) and [API Spec](https://github.com/uupaa/UserAgent.js/wiki/UserAgent) links.
-- The UserAgent.js is made of [WebModule](https://github.com/uupaa/WebModule).
 
-## Browser and NW.js(node-webkit)
+This module made of [WebModule](https://github.com/uupaa/WebModule).
+
+## Documentation
+- [Spec](https://github.com/uupaa/UserAgent.js/wiki/)
+- [API Spec](https://github.com/uupaa/UserAgent.js/wiki/UserAgent)
+
+## Browser, NW.js and Electron
 
 ```js
 <script src="<module-dir>/lib/WebModule.js"></script>

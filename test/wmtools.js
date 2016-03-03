@@ -313,12 +313,14 @@ function _splitFunctionDeclaration(sourceCode) { // @arg String - function code
     //
     var code = sourceCode.trim();
     var lines = code.split("\n");
-    var x = lines[0].indexOf("//");
-    var i = 0, iz = lines.length;
+    var basePos = lines[0].indexOf("//");
+    var min = 10;
 
-    if (x >= 10) {
-        for (; i < iz; ++i) {
-            if (lines[i].indexOf("//") !== x) {
+    if (basePos >= min) { // "function foo() {"
+        for (var i = 1, iz = lines.length; i < iz; ++i) {
+            var pos = lines[i].indexOf("//"); // get header comment position(column)
+
+            if (pos < min || pos < basePos) {
                 break;
             }
         }
@@ -708,9 +710,11 @@ Valid["repository"]     = "https://github.com/uupaa/Valid.js";
 Valid["args"]           = Valid_args;           // Valid.args(api:Function, args:Array|ArrayLike):void
 Valid["type"]           = Valid_type;           // Valid.type(value:Any, types:String):Boolean
 Valid["some"]           = Valid_some;           // Valid.some(value:String|null|undefined, candidate:String|Object, ignoreCase:Boolean = false):Boolean
-Valid["keys"]           = Valid_keys;           // Valid.keys(value:Object|null|undefined, keys:String):Boolean
+Valid["keys"]           = Valid_keys;           // Valid.keys(object:Object|Array|null|undefined, key:String):Boolean
+Valid["values"]         = Valid_values;         // Valid.values(object:Object|Array|null|undefined, value:Array):Boolean
 Valid["json"]           = Valid_json;           // Valid.json(json:Object, scheme:Object):Boolean
 Valid["stack"]          = Valid_stack;          // Valid.stack(message:String = "", depth:Integer = 3):String
+
 // --- extension ---
 Valid["register"]       = Valid_register;       // Valid.register(type:HookTypeString, callback:Function):void
 Valid["unregister"]     = Valid_unregister;     // Valid.unregister(type:HookTypeString):void
@@ -764,11 +768,11 @@ function Valid_type(value,   // @arg Any
         case "Null":        return value === null;
         case "Undefined":   return value === undefined;
         case "Array":       return Array.isArray(value);
-        case "Object":      return (value || 0).constructor === ({}).constructor;
+        case "Object":      return _isObject(value || 0);
         case "FunctionArray":
                             return Array.isArray(value) && _isFunctionArray(value);
-        case "Percent":     return typeof value === "number" && value >= 0.0 && value <= 1.0;
-        // --- integer ---
+        case "Percent":     return _isNumber(value) && value >= 0.0 && value <= 1.0;
+        // --- Integer ---
         case "Integer":     return _isInt(value);
         case "Int32":       return _isInt(value)  && value <= 0x7fffffff && value >= -0x80000000;
         case "Int16":       return _isInt(value)  && value <= 0x7fff     && value >= -0x8000;
@@ -776,6 +780,13 @@ function Valid_type(value,   // @arg Any
         case "Uint32":      return _isUint(value) && value <= 0xffffffff;
         case "Uint16":      return _isUint(value) && value <= 0xffff;
         case "Uint8":       return _isUint(value) && value <= 0xff;
+        // --- Integer Array ---
+        case "INT32Array":  return Array.isArray(value) && value.every(function(v) { return _isInt(v)  && v <= 0x7fffffff && v >= -0x80000000; });
+        case "INT16Array":  return Array.isArray(value) && value.every(function(v) { return _isInt(v)  && v <= 0x7fff     && v >= -0x8000; });
+        case "INT8Array":   return Array.isArray(value) && value.every(function(v) { return _isInt(v)  && v <= 0x7f       && v >= -0x80; });
+        case "UINT32Array": return Array.isArray(value) && value.every(function(v) { return _isUint(v) && v <= 0xffffffff; });
+        case "UINT16Array": return Array.isArray(value) && value.every(function(v) { return _isUint(v) && v <= 0xffff; });
+        case "UINT8Array":  return Array.isArray(value) && value.every(function(v) { return _isUint(v) && v <= 0xff; });
         // --- color ---
         case "AARRGGBB":
         case "RRGGBBAA":    return _isUint(value) && value <= 0xffffffff; // Uint32
@@ -836,10 +847,10 @@ function Valid_type(value,   // @arg Any
     }
 
     function _isInt(value) {
-        return typeof value === "number" && Math.ceil(value) === value;
+        return _isNumber(value) && Math.ceil(value) === value;
     }
     function _isUint(value) {
-        return typeof value === "number" && Math.ceil(value) === value && value >= 0;
+        return _isNumber(value) && Math.ceil(value) === value && value >= 0;
     }
 }
 
@@ -924,8 +935,8 @@ function Valid_some(value,        // @arg String|null|undefined - "a"
     if (value === null || value === undefined) {
         return true; // [!]
     }
-    var keys = typeof candidate === "string"              ? candidate.split(SPLITTER)
-             : candidate.constructor === ({}).constructor ? Object.keys(candidate)
+    var keys = _isString(candidate) ? candidate.split(SPLITTER)
+             : _isObject(candidate) ? Object.keys(candidate)
              : [];
 
     if (ignoreCase) {
@@ -939,20 +950,64 @@ function Valid_some(value,        // @arg String|null|undefined - "a"
     });
 }
 
-function Valid_keys(value,  // @arg Object|null|undefined - { key1, key2 }
-                    keys) { // @arg String - valid choices. "a,b" or "a|b" or "a/b"
-                            // @ret Boolean - false is invalid value.
-    if (value === null || value === undefined) {
+function Valid_keys(object, // @arg Object|Array|null|undefined - { a: 1, b: 2 }
+                    key) {  // @arg String - valid choices. "a|b"
+                            // @ret Boolean - false is unmatched object.
+    if (object === null || object === undefined) {
         return true; // [!]
     }
-    if (value.constructor === ({}).constructor) {
-        var items = keys.replace(/ /g, "").split(SPLITTER);
+    if (_isObject(object) ||          // Valid.keys({a:0,b:1}, "a|b")
+        Array.isArray(object)) {      // Valid.keys([9,9],     "0|1")
 
-        return Object.keys(value).every(function(key) {
-            return items.indexOf(key) >= 0;
+        var list = _split(key);
+
+        return Object.keys(object).every(function(objectKey) {
+            return list.indexOf(objectKey) >= 0;
         });
     }
     return false;
+}
+
+function Valid_values(object,  // @arg Object|Array|null|undefined - { a: 1, b: 2 }
+                      value) { // @arg Array - valid choices. [1, 2]
+                               // @ret Boolean - false is unmatched object.
+    if (object === null || object === undefined) {
+        return true; // [!]
+    }
+    if (_isObject(object) ||          // Valid.values({a:0,b:1}, [0,1])
+        Array.isArray(object)) {      // Valid.values([9,9], [9,9])
+
+        return Object_values(object).every(function(objectValue) {
+            return value.indexOf(objectValue) >= 0;
+        });
+    }
+    return false;
+}
+
+function Valid_some(value,        // @arg String|null|undefined - "a"
+                    candidate,    // @arg String|Object - "a|b|c", { 1: "a", 2: "b" }, ["a", "b"]
+                    ignoreCase) { // @arg Boolean = false
+                                  // @ret Boolean - true -> has, false -> has not
+    // Valid.some("foo", "foo|bar"); -> true
+    // Valid.some("foo", { foo:1, bar: 2 }); -> true
+    ignoreCase = ignoreCase || false;
+
+    if (value === null || value === undefined) {
+        return true; // [!]
+    }
+    var keys = _isString(candidate) ? candidate.split(SPLITTER)
+             : _isObject(candidate) ? Object.keys(candidate)
+             : [];
+
+    if (ignoreCase) {
+        value = value.toLowerCase();
+    }
+    return keys.some(function(token) {
+        if (ignoreCase) {
+            return value === token.toLowerCase();
+        }
+        return value === token;
+    });
 }
 
 function Valid_json(json,     // @arg JSONObject
@@ -1015,7 +1070,39 @@ function Valid_isRegistered(type) { // @arg HookTypeString
     return type in _hook;
 }
 
-// --- validate / assertions -------------------------------
+function _isObject(object) { // @arg Object|Any
+                             // @ret Boolean
+    return object.constructor === ({}).constructor;
+}
+
+function _isNumber(object) { // @arg Number|Any
+                             // @ret Boolean
+    return typeof object === "number";
+}
+
+function _isString(object) { // @arg String|Any
+                             // @ret Boolean
+    return typeof object === "string";
+}
+
+function _split(keywords) { // @arg String
+    return keywords.replace(/ /g, "").split(SPLITTER);
+}
+
+// ES2016 function. copy from ES.js
+function Object_values(source) { // @arg Object|Function|Array
+                                 // @ret ValueAnyArray [key, ... ]
+
+    var keys = Object.keys(source);
+    var i = 0, iz = keys.length;
+    var result = new Array(iz);
+
+    for (; i < iz; ++i) {
+        result[i] = source[keys[i]];
+    }
+    return result;
+}
+
 // --- exports ---------------------------------------------
 if (typeof module !== "undefined") {
     module["exports"] = Valid;
@@ -1538,12 +1625,13 @@ var BEER  = "\uD83C\uDF7B";
 
 // --- class / interfaces ----------------------------------
 function Test(moduleName, // @arg String|StringArray - target modules.
-              options) {  // @arg Object = {} - { disable, browser, worker, node, nw, button, both, ignoreError }
+              options) {  // @arg Object = {} - { disable, browser, worker, node, nw, el, button, both, ignoreError }
                           // @options.disable     Boolean = false - Disable all tests.
                           // @options.browser     Boolean = false - Enable the browser test.
                           // @options.worker      Boolean = false - Enable the webWorker test.
                           // @options.node        Boolean = false - Enable the node.js test.
-                          // @options.nw          Boolean = false - Enable the node-webkit test.
+                          // @options.nw          Boolean = false - Enable the NW.js test.
+                          // @options.el          Boolean = false - Enable the Electron (render process) test.
                           // @options.button      Boolean = false - Show test buttons.
                           // @options.both        Boolean = false - Test the primary and secondary module.
                           // @options.ignoreError Boolean = false - ignore error
@@ -1558,6 +1646,7 @@ function Test(moduleName, // @arg String|StringArray - target modules.
     this._worker      = options["worker"]      || false;
     this._node        = options["node"]        || false;
     this._nw          = options["nw"]          || false;
+    this._el          = options["el"]          || false;
     this._button      = options["button"]      || false;
     this._both        = options["both"]        || false;
     this._ignoreError = options["ignoreError"] || false;
@@ -1569,6 +1658,7 @@ function Test(moduleName, // @arg String|StringArray - target modules.
         this._worker  = false;
         this._node    = false;
         this._nw      = false;
+        this._el      = false;
         this._button  = false;
         this._both    = false;
     }
@@ -1591,7 +1681,7 @@ function Test_run(deprecated) { // @ret TestFunctionArray
     if (deprecated) { throw new Error("argument error"); }
 
     var that = this;
-    var plan = "node_primary > browser_primary > worker_primary > nw_primary";
+    var plan = "node_primary > browser_primary > worker_primary > nw_primary > el_primary";
 
     if (that._both) {
         if (IN_WORKER) {
@@ -1605,6 +1695,7 @@ function Test_run(deprecated) { // @ret TestFunctionArray
         browser_primary: function(task)     { _browserTestRunner(that, task); },
         worker_primary: function(task)      { _workerTestRunner(that, task); },
         nw_primary: function(task)          { _nwTestRunner(that, task); },
+        el_primary: function(task)          { _elTestRunner(that, task); },
         swap: function(task) {
             _swap(that);
             task.pass();
@@ -1613,6 +1704,7 @@ function Test_run(deprecated) { // @ret TestFunctionArray
         browser_secondary: function(task)   { _browserTestRunner(that, task); },
         worker_secondary: function(task)    { _workerTestRunner(that, task); },
 //      nw_secondary: function(task)        { _nwTestRunner(that, task); },
+//      el_secondary: function(task)        { _elTestRunner(that, task); },
     }, function taskFinished(err) {
         _undo(that);
 //        if (err && global["console"]) {
@@ -1645,9 +1737,10 @@ function _testRunner(that,               // @arg this
         }
         var test = {
             done: function(error) {
-                if (IN_BROWSER || IN_NW) {
-                    _addTestButton(that, testCase, error ? "red" : "green");
-
+                if (IN_BROWSER || IN_NW || IN_EL) {
+                    if (that._button) {
+                        _addTestButton(that, testCase, error ? "red" : "green");
+                    }
                     var green = ((++progress.cur / progress.max) * 255) | 0;
                     var bgcolor = "rgb(0, " + green + ", 0)";
 
@@ -1708,6 +1801,20 @@ function _nwTestRunner(that, task) {
             if (document["readyState"] === "complete") { // already document loaded
                 _onload(that, task);
             } else {
+                global.addEventListener("load", function() { _onload(that, task); });
+            }
+            return;
+        }
+    }
+    task.pass();
+}
+
+function _elTestRunner(that, task) {
+    if (that._el) {
+        if (IN_EL) {
+            if (document["readyState"] === "complete") { // already document loaded
+                _onload(that, task);
+            } else if (global.addEventListener) {
                 global.addEventListener("load", function() { _onload(that, task); });
             }
             return;
@@ -1797,10 +1904,14 @@ function _swap(that) {
         if (!that._secondary) {
             that._secondary = true;
             that._module.forEach(function(moduleName) {
-                var ns = global["WebModule"];
-
-                ns["$$$" + moduleName + "$$$"] = ns[moduleName];
-                ns[moduleName] = ns[moduleName + "_"]; // swap primary <-> secondary module
+                // swap primary <-> secondary module runtime
+                //  [1] keep original runtime to `global.WebModule.moduleName$p$ = primaryModule`
+                //  [2] overwrite module runtime
+                global["WebModule"][moduleName + "$p$"] = global["WebModule"][moduleName];       // [1]
+                global["WebModule"][moduleName]         = global["WebModule"][moduleName + "_"]; // [2]
+                if (global["WebModule"]["publish"]) { // published?
+                    global[moduleName]                  = global["WebModule"][moduleName + "_"]; // [2]
+                }
             });
         }
     }
@@ -1811,10 +1922,13 @@ function _undo(that) {
         if (that._secondary) {
             that._secondary = false;
             that._module.forEach(function(moduleName) {
-                var ns = global["WebModule"];
-
-                ns[moduleName] = ns["$$$" + moduleName + "$$$"];
-                delete ns["$$$" + moduleName + "$$$"];
+                // swap secondary <-> primary module runtime
+                //  [1] return to original runtime
+                global["WebModule"][moduleName] = global["WebModule"][moduleName + "$p$"]; // [1]
+                if (global["WebModule"]["publish"]) { // published?
+                    global[moduleName]          = global["WebModule"][moduleName + "$p$"]; // [1]
+                }
+                delete global["WebModule"][moduleName + "$p$"];
             });
         }
     }
@@ -1825,6 +1939,7 @@ function _getConsoleStyle() {
         return IN_NODE   ? "node"
              : IN_WORKER ? "worker"
              : IN_NW     ? "nw"
+             : IN_EL     ? "el"
              : STYLISH   ? "color" : "browser";
     }
     return "";
@@ -1842,7 +1957,8 @@ function _getPassFunction(that, passMessage) { // @ret PassFunction
     case "worker":  return console.log.bind(console,      "Worker(" + order + "): " + passMessage);
     case "color":   return console.log.bind(console,   "%cBrowser(" + order + "): " + passMessage + "%c ", "color:#0c0", "");
     case "browser": return console.log.bind(console,     "Browser(" + order + "): " + passMessage);
-    case "nw":      return console.log.bind(console, "node-webkit(" + order + "): " + passMessage);
+    case "nw":      return console.log.bind(console,          "nw(" + order + "): " + passMessage);
+    case "el":      return console.log.bind(console,    "electron(" + order + "): " + passMessage);
     }
     return null;
 }
@@ -1855,7 +1971,8 @@ function _getMissFunction(that, missMessage) { // @ret MissFunction
     case "worker":  return function() { console.error(   "Worker(" + order + "): " + missMessage);                           return new Error(); };
     case "color":   return function() { console.error("%cBrowser(" + order + "): " + missMessage + "%c ", "color:#red", ""); return new Error(); };
     case "browser": return function() { console.error(  "Browser(" + order + "): " + missMessage);                           return new Error(); };
-    case "nw":      return function() { console.error("node-webkit("+order + "): " + missMessage);                           return new Error(); };
+    case "nw":      return function() { console.error(       "nw(" + order + "): " + missMessage);                           return new Error(); };
+    case "el":      return function() { console.error( "electron(" + order + "): " + missMessage);                           return new Error(); };
     }
     return null;
 }
@@ -1864,9 +1981,9 @@ function _finishedLog(that, err) {
     var n = that._secondary ? 2 : 1;
 
     if (err) {
-        _getMissFunction(that, GHOST.repeat(n) + "  SOME MISSED.")();
+        _getMissFunction(that, GHOST.repeat(n) + "  MISS.")();
     } else {
-        _getPassFunction(that, BEER.repeat(n)  + "  ALL PASSED.")();
+        _getPassFunction(that, BEER.repeat(n)  + "  PASS ALL.")();
     }
 }
 
