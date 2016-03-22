@@ -3,8 +3,8 @@ var ModuleTestUserAgent = (function(global) {
 var test = new Test(["UserAgent"], { // Add the ModuleName to be tested here (if necessary).
         disable:    false, // disable all tests.
         browser:    true,  // enable browser test.
-        worker:     true,  // enable worker test.
-        node:       true,  // enable node test.
+        worker:     false,  // enable worker test.
+        node:       false,  // enable node test.
         nw:         true,  // enable nw.js test.
         el:         true,  // enable electron (render process) test.
         button:     true,  // show button.
@@ -64,10 +64,10 @@ var userAgents = {
         BROWSER_VERSION: 31.0,
         DEVICE: "",
     },
-    iPhone6sPlus: {
+    "iPhone 6s Plus": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
-            DISPLAY_DPR: 3,
+            DISPLAY_DPR: 2,
             DISPLAY_LONG: 736,
             DISPLAY_SHORT: 414,
             WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)",
@@ -79,7 +79,7 @@ var userAgents = {
         BROWSER_VERSION: 7.0,
         DEVICE: "iPhone 6s Plus"
     },
-    iPhone6s: {
+    "iPhone 6s": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
             DISPLAY_DPR: 2,
@@ -93,21 +93,6 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
         DEVICE: "iPhone 6s",
-    },
-    iPadPro: {
-        CONDITION: {
-            USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
-            DISPLAY_DPR: 2,
-            DISPLAY_LONG: 1366,
-            DISPLAY_SHORT: 1024,
-            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)"
-        },
-        OS: "iOS",
-        OS_VERSION: 9.0,
-        BROWSER: "Safari",
-        BROWSER_ENGINE: "WebKit",
-        BROWSER_VERSION: 7.0,
-        DEVICE: "iPad Pro",
     },
     iPadMini4: {
         CONDITION: {
@@ -138,7 +123,7 @@ var userAgents = {
     iPhone6Plus: {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25",
-            DISPLAY_DPR: 3,
+            DISPLAY_DPR: 2,
             DISPLAY_LONG: 736,
             DISPLAY_SHORT: 414,
             WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A8 GPU - 50.6.10)",
@@ -814,7 +799,7 @@ var userAgents = {
         DEVICE: "",
     },
     // "iPhone 6 Plus" + zoom -> "iPhone 6"
-    iPhone6Plus: {
+    "iPhone6Plus zoom": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25",
             DISPLAY_DPR: 3,
@@ -834,7 +819,7 @@ var userAgents = {
         DEVICE: "iPhone 6"
     },
     // "iPhone 6" + zoom -> "iPhone 6"
-    iPhone6: {
+    "iPhone6 zoom": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25",
             DISPLAY_DPR: 2,
@@ -854,7 +839,7 @@ var userAgents = {
         DEVICE: "iPhone 6"
     },
     // "iPhone 6s Plus" + zoom -> "iPhone 6s"
-    iPhone6sPlus: {
+    "iPhone6sPlus zoom": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
             DISPLAY_DPR: 3,
@@ -873,8 +858,8 @@ var userAgents = {
       //DEVICE: "iPhone 6s Plus"
         DEVICE: "iPhone 6s"
     },
-    // "iPhone 6s" + zoom -> "iPhone 5se"
-    iPhone6s: {
+    // "iPhone 6s" + zoom -> "iPhone SE"
+    "iPhone6s zoom": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
             DISPLAY_DPR: 2,
@@ -891,44 +876,76 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
       //DEVICE: "iPhone 6s",
-        DEVICE: "iPhone 5se"
+        DEVICE: "iPhone SE"
     },
-    iPhone5se: {
+    iPhoneSE: {
         CONDITION: {
-            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_3 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
             DISPLAY_DPR: 2,
             DISPLAY_LONG: 568,
             DISPLAY_SHORT: 320,
             WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)",
         },
         OS: "iOS",
-        OS_VERSION: 9.0,
+        OS_VERSION: 9.3,
         BROWSER: "Safari",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
-        DEVICE: "iPhone 5se",
+        DEVICE: "iPhone SE",
+    },
+    "iPadPro": {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 1366,
+            DISPLAY_SHORT: 1024,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9X GPU - 50.6.10)"
+        },
+        OS: "iOS",
+        OS_VERSION: 9.1,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPad Pro",
+    },
+    "iPadPro9.7": {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 9_3 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 1024,
+            DISPLAY_SHORT: 768,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9X GPU - 50.6.10)",
+        },
+        OS: "iOS",
+        OS_VERSION: 9.3,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPad Pro 9.7",
     },
 };
 
 // --- test cases ------------------------------------------
 function testUserAgent(test, pass, miss) {
-    WebGLDetector.detect();
+    if (global["WebGLDetector"]) {
+        WebGLDetector.detect();
 
-    var ua = new UserAgent();
+        var ua = new UserAgent();
 
-    if (global["document"]) {
-        document.body.innerHTML += JSON.stringify(ua, null, 2).replace(/\n/g, "<br>");
-        var api = {
-            "fullscreenEnabled":       "" + document["fullscreenEnabled"],
-            "webkitFullscreenEnabled": "" + document["webkitFullscreenEnabled"],
-            "requestFileSystem":       "" + global["requestFileSystem"],
-            "webkitRequestFileSystem": "" + global["webkitRequestFileSystem"],
-            "WebGLDetector.WEBGL_CONTEXT": "" + WebGLDetector.WEBGL_CONTEXT,
-            "WebGLDetector.WEBGL_VERSION": "" + WebGLDetector.WEBGL_VERSION,
-            "WebGLDetector.MAX_TEXTURE_SIZE": "" + WebGLDetector.MAX_TEXTURE_SIZE,
-        };
-        document.body.innerHTML += JSON.stringify(api, null, 2).replace(/\n/g, "<br>");
+        if (global["document"]) {
+            document.body.innerHTML += JSON.stringify(ua, null, 2).replace(/\n/g, "<br>");
+            var api = {
+                "fullscreenEnabled":       "" + document["fullscreenEnabled"],
+                "webkitFullscreenEnabled": "" + document["webkitFullscreenEnabled"],
+                "requestFileSystem":       "" + global["requestFileSystem"],
+                "webkitRequestFileSystem": "" + global["webkitRequestFileSystem"],
+                "WebGLDetector.WEBGL_CONTEXT": "" + WebGLDetector.WEBGL_CONTEXT,
+                "WebGLDetector.WEBGL_VERSION": "" + WebGLDetector.WEBGL_VERSION,
+                "WebGLDetector.MAX_TEXTURE_SIZE": "" + WebGLDetector.MAX_TEXTURE_SIZE,
+            };
+            document.body.innerHTML += JSON.stringify(api, null, 2).replace(/\n/g, "<br>");
 
+        }
     }
     test.done(pass());
 }
@@ -948,6 +965,7 @@ function testUserAgent_shorthands(test, pass, miss) {
 }
 
 function testUserAgent_manyCases(test, pass, miss) {
+    var WebGLDetector = global["WebGLDetector"] || {};
     var defaultWEBGL_VERSION = WebGLDetector.WEBGL_VERSION;
     var result = true;
 
