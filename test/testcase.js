@@ -41,6 +41,7 @@ var userAgents = {
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 31.0,
         DEVICE: "",
+        Mac: true,
     },
     Chrome: {
         CONDITION: {
@@ -77,7 +78,8 @@ var userAgents = {
         BROWSER: "Safari",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
-        DEVICE: "iPhone 6s Plus"
+        DEVICE: "iPhone 6s Plus",
+        iPhone: true,
     },
     "iPhone 6s": {
         CONDITION: {
@@ -93,6 +95,7 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
         DEVICE: "iPhone 6s",
+        iPhone: true,
     },
     iPadMini4: {
         CONDITION: {
@@ -106,6 +109,7 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
         DEVICE: "iPad mini 4",
+        iPad: true,
     },
     iPadAir2: {
         CONDITION: {
@@ -119,6 +123,7 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 6.0,
         DEVICE: "iPad Air 2",
+        iPad: true,
     },
     iPhone6Plus: {
         CONDITION: {
@@ -133,7 +138,8 @@ var userAgents = {
         BROWSER: "Safari",
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 6.0,
-        DEVICE: "iPhone 6 Plus"
+        DEVICE: "iPhone 6 Plus",
+        iPhone: true,
     },
     iPhone6: {
         CONDITION: {
@@ -149,6 +155,7 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 6.0,
         DEVICE: "iPhone 6",
+        iPhone: true,
     },
     "Nexus5 Android 4.4 Chromium based WebView": {
         CONDITION: {
@@ -162,6 +169,7 @@ var userAgents = {
         BROWSER_VERSION: "30.0.0",
         DEVICE: "Nexus 5",
         WEB_VIEW: true,
+        Android: true,
     },
     Nexus7_2013: {
         CONDITION: {
@@ -174,6 +182,7 @@ var userAgents = {
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: "27.0.1453",
         DEVICE: "Nexus 7 2nd",
+        Android: true,
     },
     FirefoxMobileForAndroid: {
         CONDITION: {
@@ -205,6 +214,7 @@ var userAgents = {
         BROWSER_VERSION: 4.0,
         DEVICE: "INFOBAR A01",
         AOSP: true,
+        Android: true,
     },
     WindowsPhone8S: {
         CONDITION: {
@@ -216,6 +226,7 @@ var userAgents = {
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 10.0,
         DEVICE: "",
+        Windows: true,
     },
     WindowsPhoneLumia920: {
         CONDITION: {
@@ -227,6 +238,7 @@ var userAgents = {
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 10.0,
         DEVICE: "",
+        Windows: true,
     },
     Kindle: {
         CONDITION: {
@@ -239,6 +251,7 @@ var userAgents = {
         BROWSER_VERSION: 3.4,
         DEVICE: "KFTT",
         AOSP: true,
+        Android: true,
     },
     GooglePlayEdition: {
         CONDITION: {
@@ -251,6 +264,7 @@ var userAgents = {
         BROWSER_VERSION: 4.0,
         DEVICE: "HTC6500LVW",
         AOSP: true,
+        Android: true,
     },
     IE11Preview: {
         CONDITION: {
@@ -262,6 +276,7 @@ var userAgents = {
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 11.0,
         DEVICE: "",
+        Windows: true,
     },
     IE10: {
         CONDITION: {
@@ -273,6 +288,7 @@ var userAgents = {
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 10.0,
         DEVICE: "",
+        Windows: true,
     },
     IE9: {
         CONDITION: {
@@ -284,6 +300,7 @@ var userAgents = {
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 9.0,
         DEVICE: "",
+        Windows: true,
     },
     IE8: {
         CONDITION: {
@@ -295,6 +312,7 @@ var userAgents = {
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 8.0,
         DEVICE: "",
+        Windows: true,
     },
     "WP7.5": {
         CONDITION: {
@@ -306,6 +324,7 @@ var userAgents = {
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 9.0,
         DEVICE: "",
+        Windows: true,
     },
     WP7: {
         CONDITION: {
@@ -317,6 +336,7 @@ var userAgents = {
         BROWSER_ENGINE: "Trident",
         BROWSER_VERSION: 7.0,
         DEVICE: "",
+        Windows: true,
     },
     OperaNext: {
         CONDITION: {
@@ -394,6 +414,7 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 6.0,
         DEVICE: "",
+        Mac: true,
     },
     "Android Browser": {
         CONDITION: {
@@ -407,6 +428,7 @@ var userAgents = {
         BROWSER_VERSION: 4.0,
         AOSP: true,
         DEVICE: "SOL23",
+        Android: true,
     },
     "Android Browser WebView": {
         CONDITION: {
@@ -420,6 +442,7 @@ var userAgents = {
         BROWSER_VERSION: 4.0,
         AOSP: true,
         DEVICE: "",
+        Android: true,
     },
     "S Browser": {
         CONDITION: {
@@ -432,6 +455,7 @@ var userAgents = {
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 18.0,
         DEVICE: "SC-04E",
+        Android: true,
     },
     "Android KitKat Chrome WebView": {
         CONDITION: {
