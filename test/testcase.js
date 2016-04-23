@@ -27,6 +27,7 @@ if (IN_BROWSER || IN_NW || IN_EL || IN_WORKER || IN_NODE) {
         testUserAgent_genericAccessor,
         testUserAgent_ES,
         testUserAgent_manyCases,
+        testUserAgent_FP,
     ]);
 }
 
@@ -1123,6 +1124,37 @@ function testUserAgent_ES(test, pass, miss) {
         test.done(pass());
     } else {
         test.done(miss());
+    }
+}
+
+function testUserAgent_FP(test, pass, miss) {
+    var ua1 = new UserAgent("DoCoMo/2.0 P07A3(c500;TB;W24H15)");
+    var ua2 = new UserAgent("KDDI-TS3H UP.Browser/6.2_7.2.7.1.K.1.400 (GUI) MMP/2.0");
+    var ua3 = new UserAgent("Vodafone/1.0/V905SH/SHJ001[/Serial] Browser/VF-NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1");
+    var ua4 = new UserAgent("SoftBank/1.0/301P/PJP10[/Serial] Browser/NetFront/3.4 Profile/MIDP-2.0 Configuration/CLDC-1.1");
+
+    var result = {
+         1: ua1.CARRIER         === "DOCOMO",
+         2: ua1.FEATURE_PHONE   === true,
+         3: ua1.DEVICE          === "P07A3",
+
+        11: ua2.CARRIER         === "KDDI",
+        12: ua2.FEATURE_PHONE   === true,
+        13: ua2.DEVICE          === "TS3H",
+
+        21: ua3.CARRIER         === "SOFTBANK",
+        22: ua3.FEATURE_PHONE   === true,
+        23: ua3.DEVICE          === "905SH",
+
+        31: ua4.CARRIER         === "SOFTBANK",
+        32: ua4.FEATURE_PHONE   === true,
+        33: ua4.DEVICE          === "301P",
+    }
+
+    if (/false/.test(JSON.stringify(result))) {
+        test.done(miss());
+    } else {
+        test.done(pass());
     }
 }
 
