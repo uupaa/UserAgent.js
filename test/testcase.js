@@ -1137,18 +1137,22 @@ function testUserAgent_FP(test, pass, miss) {
          1: ua1.CARRIER         === "DOCOMO",
          2: ua1.FEATURE_PHONE   === true,
          3: ua1.DEVICE          === "P07A3",
+         4: ua1.MOBILE          === true,
 
         11: ua2.CARRIER         === "KDDI",
         12: ua2.FEATURE_PHONE   === true,
         13: ua2.DEVICE          === "TS3H",
+        14: ua2.MOBILE          === true,
 
         21: ua3.CARRIER         === "SOFTBANK",
         22: ua3.FEATURE_PHONE   === true,
         23: ua3.DEVICE          === "905SH",
+        24: ua3.MOBILE          === true,
 
         31: ua4.CARRIER         === "SOFTBANK",
         32: ua4.FEATURE_PHONE   === true,
         33: ua4.DEVICE          === "301P",
+        34: ua4.MOBILE          === true,
     }
 
     if (/false/.test(JSON.stringify(result))) {
