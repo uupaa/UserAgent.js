@@ -28,6 +28,15 @@ if (IN_BROWSER || IN_NW || IN_EL || IN_WORKER || IN_NODE) {
         testUserAgent_ES,
         testUserAgent_manyCases,
         testUserAgent_FP,
+//
+        testUserAgent_PC,
+        testUserAgent_BASE_BROWSER,
+        testUserAgent_IE,
+        testUserAgent_Edge,
+        testUserAgent_WebKit,
+        testUserAgent_Firefox,
+        testUserAgent_Chromium,
+        testUserAgent_BROWSER_ENGINE,
     ]);
 }
 
@@ -1159,6 +1168,92 @@ function testUserAgent_FP(test, pass, miss) {
         test.done(miss());
     } else {
         test.done(pass());
+    }
+}
+
+function testUserAgent_PC(test, pass, miss) {
+    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua2 = new UserAgent("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+
+    if (!ua1.PC && !ua2.PC && !ua3.PC) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_BASE_BROWSER(test, pass, miss) {
+    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua2 = new UserAgent("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+
+    if (ua1.BASE_BROWSER === "WebKit"   &&
+        ua2.BASE_BROWSER === "Chromium" &&
+        ua3.BASE_BROWSER === "Edge") {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_IE(test, pass, miss) {
+    var ua3 = new UserAgent("Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; HTC; Windows Phone 8S by HTC)");
+
+    if (ua3.BASE_BROWSER === "IE" && ua3.IE) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_Edge(test, pass, miss) {
+    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+
+    if (ua3.BASE_BROWSER === "Edge" && ua3.Edge) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_WebKit(test, pass, miss) {
+    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+
+    if (ua1.BASE_BROWSER === "WebKit" && ua1.WebKit) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_Firefox(test, pass, miss) {
+    var ua1 = new UserAgent("Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0");
+
+    if (ua1.BASE_BROWSER === "Firefox" && ua1.Firefox) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_Chromium(test, pass, miss) {
+    var ua2 = new UserAgent("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+
+    if (ua2.BASE_BROWSER === "Chromium" && ua2.Chromium) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_BROWSER_ENGINE(test, pass, miss) {
+    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+
+    if (ua3.BROWSER_ENGINE === "EdgeHTML" && ua3.Edge) {
+        test.done(pass());
+    } else {
+        test.done(miss());
     }
 }
 
