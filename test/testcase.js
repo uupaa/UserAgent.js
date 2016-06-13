@@ -75,6 +75,22 @@ var userAgents = {
         BROWSER_VERSION: 31.0,
         DEVICE: "",
     },
+    "iPhone 6s Plus(iOS 10)": {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 736,
+            DISPLAY_SHORT: 414,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)",
+        },
+        OS: "iOS",
+        OS_VERSION: 10.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPhone 6s Plus",
+        iPhone: true,
+    },
     "iPhone 6s Plus": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
