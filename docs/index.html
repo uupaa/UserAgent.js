@@ -11,9 +11,19 @@ WebModule.publish = true;
 
 <script src="modules/ES.js"></script>
 <script src="modules/WebGLDetector.js"></script>
+<!--
 <script src="test/wmtools.js"></script>
+ -->
 <script src="lib/UserAgent.js"></script>
+<!--
 <script src="test/testcase.js"></script>
+ -->
+
+<script>
+var ua = new UserAgent();
+
+document.body.innerHTML += JSON.stringify(ua, null, 2).replace(/\n/g, "<br>");
+</script>
 
 </body></html>
 
