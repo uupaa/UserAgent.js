@@ -276,7 +276,7 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 3.4,
         DEVICE: "KFTT",
-        AOSP: true,
+        AOSP: false,
         Android: true,
     },
     GooglePlayEdition: {
@@ -445,7 +445,7 @@ var userAgents = {
     "Android Browser": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Linux; U; Android 4.2.2; ja-jp; SonySOL23 Build/14.1.C.0.467) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30",
-            //                                  ~~~~~~~~~~~~~  ~~~~~  ~~~~~~~~~ ~~~~~                                                                  ~~~~~~ 
+            //                                  ~~~~~~~~~~~~~  ~~~~~  ~~~~~~~~~ ~~~~~                                                                  ~~~~~~
         },
         OS: "Android",
         OS_VERSION: 4.2,
@@ -494,18 +494,6 @@ var userAgents = {
         BROWSER_ENGINE: "Blink",
         BROWSER_VERSION: 30.0,
         DEVICE: "Nexus 5",
-    },
-    "Kindle": {
-        CONDITION: {
-            USER_AGENT: "Mozilla/5.0 (Linux; Android 4.0.3; en-us; KFTT    Build/IML74K)  AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.4 Mobile Safari/535.19 Silk-Accelerated=true",
-            //                               ~~~~~~~~~~~~~         ~~~~~~~ ~~~~~                                                 ~~~~~~~~
-        },
-        OS: "Android",
-        OS_VERSION: 4.0,
-        BROWSER: "AOSP",
-        BROWSER_ENGINE: "WebKit",
-        BROWSER_VERSION: 3.4,
-        DEVICE: "KFTT",
     },
     "Nexus7 Android 4.2 Chrome 18": {
         CONDITION: {
@@ -866,7 +854,8 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 6.0,
       //DEVICE: "iPhone 6 Plus"
-        DEVICE: "iPhone 6"
+        DEVICE: "iPhone 6",
+        TOUCH_3D: false,
     },
     // "iPhone 6" + zoom -> "iPhone 6"
     "iPhone6 zoom": {
@@ -886,7 +875,8 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 6.0,
       //DEVICE: "iPhone 6",
-        DEVICE: "iPhone 6"
+        DEVICE: "iPhone 6",
+        TOUCH_3D: false,
     },
     // "iPhone 6s Plus" + zoom -> "iPhone 6s"
     "iPhone6sPlus zoom": {
@@ -906,7 +896,8 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
       //DEVICE: "iPhone 6s Plus"
-        DEVICE: "iPhone 6s"
+        DEVICE: "iPhone 6s",
+        TOUCH_3D: true,
     },
     // "iPhone 6s" + zoom -> "iPhone SE"
     "iPhone6s zoom": {
@@ -926,7 +917,8 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
       //DEVICE: "iPhone 6s",
-        DEVICE: "iPhone SE"
+        DEVICE: "iPhone SE",
+        TOUCH_3D: false, // because iPhone 6s -> iPhone SE
     },
     iPhoneSE: {
         CONDITION: {
@@ -942,8 +934,9 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
         DEVICE: "iPhone SE",
+        TOUCH_3D: false,
     },
-    "iPadPro": {
+    "iPadPro iOS 9.1": {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
             DISPLAY_DPR: 2,
@@ -957,6 +950,23 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
         DEVICE: "iPad Pro",
+        TOUCH_3D: false,
+    },
+    "iPadPro iOS 10.0": {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 10_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 1366,
+            DISPLAY_SHORT: 1024,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9X GPU - 50.6.10)"
+        },
+        OS: "iOS",
+        OS_VERSION: 10.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPad Pro",
+        TOUCH_3D: true,
     },
     "iPadPro9.7": {
         CONDITION: {
@@ -973,6 +983,39 @@ var userAgents = {
         BROWSER_VERSION: 7.0,
         DEVICE: "iPad Pro 9.7",
     },
+    "iPhone 7 zoomed": {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+          //DISPLAY_LONG: 667,
+            DISPLAY_LONG: 568,
+          //DISPLAY_SHORT: 375,
+            DISPLAY_SHORT: 320,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Metal - 33)",
+            ZOOM: true,
+        },
+        OS: "iOS",
+        OS_VERSION: 10.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPhone 7",
+    },
+    "iPhone 7": {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 667,
+            DISPLAY_SHORT: 375,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Metal - 33)",
+        },
+        OS: "iOS",
+        OS_VERSION: 10.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPhone 7",
+    },
 };
 
 // --- test cases ------------------------------------------
@@ -980,22 +1023,24 @@ function testUserAgent(test, pass, miss) {
     if (global["WebGLDetector"]) {
         WebGLDetector.detect();
 
-        var ua = new UserAgent();
+        new UserAgent("", {
+            callback: function(ua) {
+                if (global["document"]) {
+                    document.body.innerHTML += JSON.stringify(ua, null, 2).replace(/\n/g, "<br>");
+                    var api = {
+                        "fullscreenEnabled":       "" + document["fullscreenEnabled"],
+                        "webkitFullscreenEnabled": "" + document["webkitFullscreenEnabled"],
+                        "requestFileSystem":       "" + global["requestFileSystem"],
+                        "webkitRequestFileSystem": "" + global["webkitRequestFileSystem"],
+                        "WebGLDetector.WEBGL_CONTEXT": "" + WebGLDetector.WEBGL_CONTEXT,
+                        "WebGLDetector.WEBGL_VERSION": "" + WebGLDetector.WEBGL_VERSION,
+                        "WebGLDetector.MAX_TEXTURE_SIZE": "" + WebGLDetector.MAX_TEXTURE_SIZE,
+                    };
+                    document.body.innerHTML += JSON.stringify(api, null, 2).replace(/\n/g, "<br>");
 
-        if (global["document"]) {
-            document.body.innerHTML += JSON.stringify(ua, null, 2).replace(/\n/g, "<br>");
-            var api = {
-                "fullscreenEnabled":       "" + document["fullscreenEnabled"],
-                "webkitFullscreenEnabled": "" + document["webkitFullscreenEnabled"],
-                "requestFileSystem":       "" + global["requestFileSystem"],
-                "webkitRequestFileSystem": "" + global["webkitRequestFileSystem"],
-                "WebGLDetector.WEBGL_CONTEXT": "" + WebGLDetector.WEBGL_CONTEXT,
-                "WebGLDetector.WEBGL_VERSION": "" + WebGLDetector.WEBGL_VERSION,
-                "WebGLDetector.MAX_TEXTURE_SIZE": "" + WebGLDetector.MAX_TEXTURE_SIZE,
-            };
-            document.body.innerHTML += JSON.stringify(api, null, 2).replace(/\n/g, "<br>");
-
-        }
+                }
+            }
+        });
     }
     test.done(pass());
 }
@@ -1037,14 +1082,14 @@ function testUserAgent_manyCases(test, pass, miss) {
 
         if ("OS" in item) {
             if (item.OS !== detected.OS) {
-                console.log("OS", item.OS, detected.OS);
+                console.log(item.DEVICE, "OS", item.OS, detected.OS);
                 test.done(miss());
                 return
             }
         }
         if ("BROWSER" in item) {
             if (item.BROWSER !== detected.BROWSER) {
-                console.log("BROWSER", item.BROWSER, detected.BROWSER);
+                console.log(item.DEVICE, "BROWSER", item.BROWSER, detected.BROWSER);
                 test.done(miss());
                 return;
             }
@@ -1052,13 +1097,13 @@ function testUserAgent_manyCases(test, pass, miss) {
         if ("OS_VERSION" in item) {
             if (typeof item.OS_VERSION === "string") {
                 if (item.OS_VERSION !== detected.OS_VERSION) {
-                    console.log("OS_VERSION", item.OS_VERSION, detected.OS_VERSION);
+                    console.log(item.DEVICE, "OS_VERSION", item.OS_VERSION, detected.OS_VERSION);
                     test.done(miss());
                     return;
                 }
             } else if (typeof item.OS_VERSION === "number") {
                 if (parseFloat(item.OS_VERSION) !== parseFloat(detected.OS_VERSION)) {
-                    console.log("OS_VERSION", item.OS_VERSION, detected.OS_VERSION);
+                    console.log(item.DEVICE, "OS_VERSION", item.OS_VERSION, detected.OS_VERSION);
                     test.done(miss());
                     return;
                 }
@@ -1067,13 +1112,13 @@ function testUserAgent_manyCases(test, pass, miss) {
         if ("BROWSER_VERSION" in item) {
             if (typeof item.BROWSER_VERSION === "string") {
                 if (item.BROWSER_VERSION !== detected.BROWSER_VERSION) {
-                    console.log("BROWSER_VERSION", item.BROWSER_VERSION, detected.BROWSER_VERSION);
+                    console.log(item.DEVICE, "BROWSER_VERSION", item.BROWSER_VERSION, detected.BROWSER_VERSION);
                     test.done(miss());
                     return;
                 }
             } else if (typeof item.BROWSER_VERSION === "number") {
                 if (parseFloat(item.BROWSER_VERSION) !== parseFloat(detected.BROWSER_VERSION)) {
-                    console.log("BROWSER_VERSION", item.BROWSER_VERSION, detected.BROWSER_VERSION);
+                    console.log(item.DEVICE, "BROWSER_VERSION", item.BROWSER_VERSION, detected.BROWSER_VERSION);
                     test.done(miss());
                     return;
                 }
@@ -1089,14 +1134,23 @@ function testUserAgent_manyCases(test, pass, miss) {
         }
         if ("WEB_VIEW" in item) {
             if (item.WEB_VIEW !== detected.WEB_VIEW) {
-                console.log("WEB_VIEW", item.WEB_VIEW, detected.WEB_VIEW);
+                console.log(item.DEVICE, "WEB_VIEW", item.WEB_VIEW, detected.WEB_VIEW);
                 test.done(miss());
                 return;
             }
         }
         if ("AOSP" in item) {
             if (item.AOSP !== detected.AOSP) {
-                console.log("AOSP", item.AOSP, detected.AOSP);
+                debugger;
+                console.log(item.DEVICE, "AOSP", item.AOSP, detected.AOSP);
+                test.done(miss());
+                return;
+            }
+        }
+        if ("TOUCH_3D" in item) {
+            if (item["TOUCH_3D"] !== detected["TOUCH_3D"]) {
+                debugger;
+                console.log(item.DEVICE, "TOUCH_3D", item["TOUCH_3D"], detected["TOUCH_3D"]);
                 test.done(miss());
                 return;
             }

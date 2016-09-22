@@ -772,6 +772,9 @@ function Valid_type(value,   // @arg Any
         case "FunctionArray":
                             return Array.isArray(value) && _isFunctionArray(value);
         case "Percent":     return _isNumber(value) && value >= 0.0 && value <= 1.0;
+        case "Node":        return _isNode(value);
+        case "Error":       return _isError(value);
+        case "Event":       return _isEvent(value);
         // --- Integer ---
         case "Integer":     return _isInt(value);
         case "Int32":       return _isInt(value)  && value <= 0x7fffffff && value >= -0x80000000;
@@ -851,6 +854,29 @@ function Valid_type(value,   // @arg Any
     }
     function _isUint(value) {
         return _isNumber(value) && Math.ceil(value) === value && value >= 0;
+    }
+    function _isNode(value) {
+        return value instanceof Node  || _isBaseClass(value, [HTMLElement, Element, Node]);
+    }
+    function _isError(value) {
+        return value instanceof Error || _isBaseClass(value, [Error]);
+    }
+    function _isEvent(value) {
+        return value instanceof Event || _isBaseClass(value, [Event]);
+    }
+    function _isBaseClass(value, classArray) {
+        if (value && "constructor" in value) {
+            if ("prototype" in value["constructor"]) {
+                var v = value["constructor"]["prototype"];
+
+                for (var i = 0, iz = classArray.length; i < iz; ++i) {
+                    if (v instanceof classArray[i]) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
 
@@ -1127,6 +1153,11 @@ function Help(target,      // @arg Function|String - function or function-path o
               options) {   // @arg Object = {} - { nolink }
                            // @options.nolink Boolean = false
                            // @desc quick online help.
+    if (typeof target === "object" && target["repository"]) {
+        // var Class = { function, ... } object
+        console.info(target);
+        return;
+    }
     _if(!/string|function/.test(typeof target),     Help, "target");
     _if(!/string|undefined/.test(typeof highlight), Help, "highlight");
     options = options || {};
@@ -1909,7 +1940,7 @@ function _swap(that) {
                 //  [2] overwrite module runtime
                 global["WebModule"][moduleName + "$p$"] = global["WebModule"][moduleName];       // [1]
                 global["WebModule"][moduleName]         = global["WebModule"][moduleName + "_"]; // [2]
-                if (global["WebModule"]["publish"]) { // published?
+                if (global["WebModule"]["PUBLISH"]) { // published?
                     global[moduleName]                  = global["WebModule"][moduleName + "_"]; // [2]
                 }
             });
@@ -1925,7 +1956,7 @@ function _undo(that) {
                 // swap secondary <-> primary module runtime
                 //  [1] return to original runtime
                 global["WebModule"][moduleName] = global["WebModule"][moduleName + "$p$"]; // [1]
-                if (global["WebModule"]["publish"]) { // published?
+                if (global["WebModule"]["PUBLISH"]) { // published?
                     global[moduleName]          = global["WebModule"][moduleName + "$p$"]; // [1]
                 }
                 delete global["WebModule"][moduleName + "$p$"];
