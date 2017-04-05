@@ -2,9 +2,9 @@
 
 require("../../lib/WebModule.js");
 
-WebModule.verify  = true;
-WebModule.verbose = true;
-WebModule.publish = true;
+WebModule.VERIFY  = true;
+WebModule.VERBOSE = true;
+WebModule.PUBLISH = true;
 
 require("../../node_modules/uupaa.es.js/lib/ES.js");
 require("../wmtools.js");

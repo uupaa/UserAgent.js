@@ -1,4 +1,4 @@
-# UserAgent.js [![Build Status](https://travis-ci.org/uupaa/UserAgent.js.svg)](https://travis-ci.org/uupaa/UserAgent.js)
+ UserAgent.js [![Build Status](https://travis-ci.org/uupaa/UserAgent.js.svg)](https://travis-ci.org/uupaa/UserAgent.js)
 
 [![npm](https://nodei.co/npm/uupaa.useragent.js.svg?downloads=true&stars=true)](https://nodei.co/npm/uupaa.useragent.js/)
 
@@ -14,62 +14,47 @@ This module made of [WebModule](https://github.com/uupaa/WebModule).
 ## Browser, NW.js and Electron
 
 ```js
-<script src="<module-dir>/lib/WebModule.js"></script>
-<script src="<module-dir>/lib/UserAgent.js"></script>
+<script src="UserAgent.js/lib/WebModule.js"></script>
+<script src="UserAgent.js/node_modules/uupaa.webgldetector.js/lib/WebGLDetector.js"></script>
+<script src="UserAgent.js/lib/UserAgent.js"></script>
 <script>
 
 var ua = new UserAgent();
+console.dir(ua);
+</script>
+```
 
-var result = {
-    OS:               ua.OS,
-    OS_VERSION:       ua.OS_VERSION,
-    BROWSER:          ua.BROWSER,
-    BROWSER_ENGINE:   ua.BROWSER_ENGINE,
-    BROWSER_VERSION:  ua.BROWSER_VERSION,
-    USER_AGENT:       ua.USER_AGENT,
-    LANGUAGE:         ua.LANGUAGE,
-    WEB_VIEW:         ua.WEB_VIEW,
-    DEVICE:           ua.DEVICE,
-    AOSP:             ua.AOSP,
-    // --- shorthand ---
-    iOS               ua.iOS,
-    Android           ua.Android,
-};
-
-console.dir(result);
-
-/*
+```
 {
-  "OS": "Mac",
-  "OS_VERSION": "10.9.5",
-  "BROWSER": "Chrome",
+  "OS":             "Mac",
+  "OS_VERSION":     "10.9.5",
+  "BROWSER":        "Chrome",
   "BROWSER_ENGINE": "Blink",
   "BROWSER_VERSION": "44.0.2403",
-  "USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36",
-  "LANGUAGE": "en",
-  "WEB_VIEW": false,
-  "DEVICE": "",
-  "AOSP": false,
-  "iOS": false,
-  "Android": false,
+  "USER_AGENT":     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36",
+  "LANGUAGE":       "en",
+  "WEB_VIEW":       false,
+  "DEVICE":         "",
+  "AOSP":           false,
+  "iOS":            false,
+  "Android":        false,
 }
- */
-</script>
 ```
 
 ## WebWorkers
 
 ```js
-importScripts("<module-dir>lib/WebModule.js");
-importScripts("<module-dir>lib/UserAgent.js");
+importScripts("UserAgent.js/lib/WebModule.js");
+importScripts("UserAgent.js/node_modules/uupaa.webgldetector.js/lib/WebGLDetector.js");
+importScripts("UserAgent.js/lib/UserAgent.js");
 
 ```
 
 ## Node.js
 
 ```js
-require("<module-dir>lib/WebModule.js");
-require("<module-dir>lib/UserAgent.js");
-
+require("UserAgent.js/lib/WebModule.js");
+require("UserAgent.js/node_modules/uupaa.webgldetector.js/lib/WebGLDetector.js");
+require("UserAgent.js/lib/UserAgent.js");
 ```
 

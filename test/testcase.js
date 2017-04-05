@@ -40,7 +40,7 @@ if (IN_BROWSER || IN_NW || IN_EL || IN_WORKER || IN_NODE) {
     ]);
 }
 
-var userAgents = {
+var testPattern = {
     Mac: {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
@@ -987,10 +987,8 @@ var userAgents = {
         CONDITION: {
             USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
             DISPLAY_DPR: 2,
-          //DISPLAY_LONG: 667,
-            DISPLAY_LONG: 568,
-          //DISPLAY_SHORT: 375,
-            DISPLAY_SHORT: 320,
+            DISPLAY_LONG:  568, // 667 -> 568 (zoomed)
+            DISPLAY_SHORT: 320, // 375 -> 320 (zoomed)
             WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Metal - 33)",
             ZOOM: true,
         },
@@ -1015,6 +1013,51 @@ var userAgents = {
         BROWSER_ENGINE: "WebKit",
         BROWSER_VERSION: 7.0,
         DEVICE: "iPhone 7",
+    },
+    "iPhone 7 Plus zoomed": {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_2 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG:  667, // 736 -> 667 (zoomed)
+            DISPLAY_SHORT: 375, // 414 -> 375 (zoomed)
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Metal - 33)",
+            ZOOM: true,
+        },
+        OS: "iOS",
+        OS_VERSION: 10.2,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPhone 7", // iPhone 7 Plus zoomed -> iPhoen 7
+    },
+    "iPhone 7 Plus": {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_2 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/7.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            DISPLAY_LONG: 736,
+            DISPLAY_SHORT: 414,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Metal - 33)",
+        },
+        OS: "iOS",
+        OS_VERSION: 10.2,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 7.0,
+        DEVICE: "iPhone 7 Plus",
+    },
+    iPad5th: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (iPad; CPU OS 10_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/10.0 Mobile/10A403 Safari/8536.25",
+            DISPLAY_DPR: 2,
+            WEBGL_VERSION: "WebGL 1.0 (OpenGL ES 2.0 Apple A9 GPU - 50.6.10)",
+        },
+        OS: "iOS",
+        OS_VERSION: 10.0,
+        BROWSER: "Safari",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 10.0,
+        DEVICE: "iPad 5",
+        iPad: true,
     },
 };
 
@@ -1064,8 +1107,8 @@ function testUserAgent_manyCases(test, pass, miss) {
     var defaultWEBGL_VERSION = WebGLDetector.WEBGL_VERSION;
     var result = true;
 
-    for (var key in userAgents) {
-        var item = userAgents[key];
+    for (var key in testPattern) {
+        var item = testPattern[key];
         var condition = item.CONDITION;
 
         if ("WEBGL_VERSION" in condition) {
