@@ -36,7 +36,8 @@ if (IN_BROWSER || IN_NW || IN_EL || IN_WORKER || IN_NODE) {
         testUserAgent_WebKit,
         testUserAgent_Firefox,
         testUserAgent_Chromium,
-        testUserAgent_BROWSER_ENGINE,
+        testUserAgent_Safari,
+        testUserAgent_cache,
     ]);
 }
 
@@ -265,19 +266,6 @@ var testPattern = {
         BROWSER_VERSION: 10.0,
         DEVICE: "",
         Windows: true,
-    },
-    Kindle: {
-        CONDITION: {
-            USER_AGENT: "Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; KFTT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.4 Mobile Safari/535.19 Silk-Accelerated=true",
-        },
-        OS: "Android",
-        OS_VERSION: "4.0.3",
-        BROWSER: "AOSP",
-        BROWSER_ENGINE: "WebKit",
-        BROWSER_VERSION: 3.4,
-        DEVICE: "KFTT",
-        AOSP: false,
-        Android: true,
     },
     GooglePlayEdition: {
         CONDITION: {
@@ -1058,6 +1046,39 @@ var testPattern = {
         BROWSER_VERSION: 10.0,
         DEVICE: "iPad 5",
         iPad: true,
+        Kindle: false,
+    },
+    WebKitBasedKindleSlik: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; KFTT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.4 Mobile Safari/535.19 Silk-Accelerated=true",
+          //USER_AGENT: "Mozilla/5.0 (PlayStation Vita 1.50) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2",
+        },
+        OS: "Android",
+        OS_VERSION: "4.0.3",
+        BROWSER: "Silk",
+        BROWSER_ENGINE: "WebKit",
+        BROWSER_VERSION: 3.4,
+        DEVICE: "KFTT",
+        AOSP: false,
+        Silk: true,
+        Kindle: true,
+        Android: true,
+    },
+    BlinkBasedKindleSlik: {
+        CONDITION: {
+            USER_AGENT: "Mozilla/5.0 (Linux; Android 4.4.3; KFTHWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Silk/44.1.54 like Chrome/44.0.2403.63 Safari/537.36",
+          //USER_AGENT: "Mozilla/5.0 (PlayStation Vita 1.50) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2",
+        },
+        OS: "Android",
+        OS_VERSION: "4.4.3",
+        BROWSER: "Silk",
+        BROWSER_ENGINE: "Blink",
+        BROWSER_VERSION: 44.1,
+        DEVICE: "KFTHWI",
+        AOSP: false,
+        Silk: true,
+        Kindle: true,
+        Android: true,
     },
 };
 
@@ -1106,6 +1127,7 @@ function testUserAgent_manyCases(test, pass, miss) {
     var WebGLDetector = global["WebGLDetector"] || {};
     var defaultWEBGL_VERSION = WebGLDetector.WEBGL_VERSION;
     var result = true;
+    var missed = false;
 
     for (var key in testPattern) {
         var item = testPattern[key];
@@ -1126,29 +1148,33 @@ function testUserAgent_manyCases(test, pass, miss) {
         if ("OS" in item) {
             if (item.OS !== detected.OS) {
                 console.log(item.DEVICE, "OS", item.OS, detected.OS);
-                test.done(miss());
-                return
+                debugger;
+                missed = true;
+                break;
             }
         }
         if ("BROWSER" in item) {
             if (item.BROWSER !== detected.BROWSER) {
                 console.log(item.DEVICE, "BROWSER", item.BROWSER, detected.BROWSER);
-                test.done(miss());
-                return;
+                debugger;
+                missed = true;
+                break;
             }
         }
         if ("OS_VERSION" in item) {
             if (typeof item.OS_VERSION === "string") {
                 if (item.OS_VERSION !== detected.OS_VERSION) {
                     console.log(item.DEVICE, "OS_VERSION", item.OS_VERSION, detected.OS_VERSION);
-                    test.done(miss());
-                    return;
+                    debugger;
+                    missed = true;
+                    break;
                 }
             } else if (typeof item.OS_VERSION === "number") {
                 if (parseFloat(item.OS_VERSION) !== parseFloat(detected.OS_VERSION)) {
                     console.log(item.DEVICE, "OS_VERSION", item.OS_VERSION, detected.OS_VERSION);
-                    test.done(miss());
-                    return;
+                    debugger;
+                    missed = true;
+                    break;
                 }
             }
         }
@@ -1156,14 +1182,16 @@ function testUserAgent_manyCases(test, pass, miss) {
             if (typeof item.BROWSER_VERSION === "string") {
                 if (item.BROWSER_VERSION !== detected.BROWSER_VERSION) {
                     console.log(item.DEVICE, "BROWSER_VERSION", item.BROWSER_VERSION, detected.BROWSER_VERSION);
-                    test.done(miss());
-                    return;
+                    debugger;
+                    missed = true;
+                    break;
                 }
             } else if (typeof item.BROWSER_VERSION === "number") {
                 if (parseFloat(item.BROWSER_VERSION) !== parseFloat(detected.BROWSER_VERSION)) {
                     console.log(item.DEVICE, "BROWSER_VERSION", item.BROWSER_VERSION, detected.BROWSER_VERSION);
-                    test.done(miss());
-                    return;
+                    debugger;
+                    missed = true;
+                    break;
                 }
             }
         }
@@ -1171,33 +1199,40 @@ function testUserAgent_manyCases(test, pass, miss) {
             if (item.DEVICE !== detected.DEVICE) {
                 console.log("DEVICE", item.DEVICE, detected.DEVICE);
                 debugger;
-                test.done(miss());
-                return;
+                missed = true;
+                break;
             }
         }
         if ("WEB_VIEW" in item) {
             if (item.WEB_VIEW !== detected.WEB_VIEW) {
                 console.log(item.DEVICE, "WEB_VIEW", item.WEB_VIEW, detected.WEB_VIEW);
-                test.done(miss());
-                return;
+                debugger;
+                missed = true;
+                break;
             }
         }
         if ("AOSP" in item) {
             if (item.AOSP !== detected.AOSP) {
-                debugger;
                 console.log(item.DEVICE, "AOSP", item.AOSP, detected.AOSP);
-                test.done(miss());
-                return;
+                debugger;
+                missed = true;
+                break;
             }
         }
         if ("TOUCH_3D" in item) {
             if (item["TOUCH_3D"] !== detected["TOUCH_3D"]) {
-                debugger;
                 console.log(item.DEVICE, "TOUCH_3D", item["TOUCH_3D"], detected["TOUCH_3D"]);
-                test.done(miss());
-                return;
+                debugger;
+                missed = true;
+                break;
             }
         }
+    }
+    if (missed) {
+        console.dir(testPattern[key]);
+        console.dir(detected);
+        test.done(miss());
+        return;
     }
 
     WebGLDetector.WEBGL_VERSION = defaultWEBGL_VERSION;
@@ -1360,10 +1395,31 @@ function testUserAgent_Chromium(test, pass, miss) {
     }
 }
 
+function testUserAgent_Safari(test, pass, miss) {
+    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+
+    if (ua1["Safari"]) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
 function testUserAgent_BROWSER_ENGINE(test, pass, miss) {
     var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
 
     if (ua3.BROWSER_ENGINE === "EdgeHTML" && ua3.Edge) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_cache(test, pass, miss) {
+    var ua1 = UserAgent.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua2 = UserAgent.parse();
+
+    if (ua2["Safari"]) {
         test.done(pass());
     } else {
         test.done(miss());
