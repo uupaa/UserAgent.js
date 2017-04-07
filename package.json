@@ -1,9 +1,9 @@
 {
   "name": "uupaa.useragent.js",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Detect the OS, Browser and WebView from UserAgent String.",
   "url": "https://github.com/uupaa/UserAgent.js",
-  "keywords": ["UserAgent", "WebView", "uupaa", "WebModule", "Unstable"],
+  "keywords": ["UserAgent", "WebView", "uupaa", "WebModule"],
   "repository": {
     "type": "git",
     "url": "https://github.com/uupaa/UserAgent.js.git"

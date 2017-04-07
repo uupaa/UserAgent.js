@@ -1087,7 +1087,7 @@ function testUserAgent(test, pass, miss) {
     if (global["WebGLDetector"]) {
         WebGLDetector.detect();
 
-        new UserAgent("", {
+        UserAgent.parse("", {
             callback: function(ua) {
                 if (global["document"]) {
                     document.body.innerHTML += JSON.stringify(ua, null, 2).replace(/\n/g, "<br>");
@@ -1113,8 +1113,8 @@ function testUserAgent_shorthands(test, pass, miss) {
     var iPhone6 = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25";
     var Nexus5  = "Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36";
 
-    var ua1 = new UserAgent(iPhone6);
-    var ua2 = new UserAgent(Nexus5);
+    var ua1 = UserAgent.parse(iPhone6);
+    var ua2 = UserAgent.parse(Nexus5);
 
     if (ua1.iOS && ua2.Android) {
         test.done(pass());
@@ -1141,7 +1141,7 @@ function testUserAgent_manyCases(test, pass, miss) {
             WebGLDetector.WEBGL_VERSION = defaultWEBGL_VERSION;
         }
 
-        var detected = new UserAgent(condition.USER_AGENT, condition);
+        var detected = UserAgent.parse(condition.USER_AGENT, condition);
 
         console.log(key);
 
@@ -1241,7 +1241,7 @@ function testUserAgent_manyCases(test, pass, miss) {
 }
 
 function testUserAgent_LANGUAGE(test, pass, miss) {
-    var ua = new UserAgent();
+    var ua = UserAgent.parse();
 
     if (ua.LANGUAGE) {
         test.done(pass());
@@ -1251,9 +1251,9 @@ function testUserAgent_LANGUAGE(test, pass, miss) {
 }
 
 function testUserAgent_MOBILE(test, pass, miss) {
-    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
-    var ua2 = new UserAgent("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
-    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+    var ua1 = UserAgent.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua2 = UserAgent.parse("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+    var ua3 = UserAgent.parse("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
 
     if (ua1.MOBILE && ua2.MOBILE && ua3.MOBILE) {
         test.done(pass());
@@ -1263,7 +1263,7 @@ function testUserAgent_MOBILE(test, pass, miss) {
 }
 
 function testUserAgent_genericAccessor(test, pass, miss) {
-    var ua = new UserAgent();
+    var ua = UserAgent.parse();
 
     ua.set("LANGUAGE", "hoge");
 
@@ -1275,7 +1275,7 @@ function testUserAgent_genericAccessor(test, pass, miss) {
 }
 
 function testUserAgent_ES(test, pass, miss) {
-    var ua = new UserAgent();
+    var ua = UserAgent.parse();
 
     if ("ES5" in ua && "ES6" in ua) {
         test.done(pass());
@@ -1285,10 +1285,10 @@ function testUserAgent_ES(test, pass, miss) {
 }
 
 function testUserAgent_FP(test, pass, miss) {
-    var ua1 = new UserAgent("DoCoMo/2.0 P07A3(c500;TB;W24H15)");
-    var ua2 = new UserAgent("KDDI-TS3H UP.Browser/6.2_7.2.7.1.K.1.400 (GUI) MMP/2.0");
-    var ua3 = new UserAgent("Vodafone/1.0/V905SH/SHJ001[/Serial] Browser/VF-NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1");
-    var ua4 = new UserAgent("SoftBank/1.0/301P/PJP10[/Serial] Browser/NetFront/3.4 Profile/MIDP-2.0 Configuration/CLDC-1.1");
+    var ua1 = UserAgent.parse("DoCoMo/2.0 P07A3(c500;TB;W24H15)");
+    var ua2 = UserAgent.parse("KDDI-TS3H UP.Browser/6.2_7.2.7.1.K.1.400 (GUI) MMP/2.0");
+    var ua3 = UserAgent.parse("Vodafone/1.0/V905SH/SHJ001[/Serial] Browser/VF-NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1");
+    var ua4 = UserAgent.parse("SoftBank/1.0/301P/PJP10[/Serial] Browser/NetFront/3.4 Profile/MIDP-2.0 Configuration/CLDC-1.1");
 
     var result = {
          1: ua1.CARRIER         === "DOCOMO",
@@ -1320,9 +1320,9 @@ function testUserAgent_FP(test, pass, miss) {
 }
 
 function testUserAgent_PC(test, pass, miss) {
-    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
-    var ua2 = new UserAgent("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
-    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+    var ua1 = UserAgent.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua2 = UserAgent.parse("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+    var ua3 = UserAgent.parse("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
 
     if (!ua1.PC && !ua2.PC && !ua3.PC) {
         test.done(pass());
@@ -1332,9 +1332,9 @@ function testUserAgent_PC(test, pass, miss) {
 }
 
 function testUserAgent_BASE_BROWSER(test, pass, miss) {
-    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
-    var ua2 = new UserAgent("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
-    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+    var ua1 = UserAgent.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua2 = UserAgent.parse("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+    var ua3 = UserAgent.parse("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
 
     if (ua1.BASE_BROWSER === "WebKit"   &&
         ua2.BASE_BROWSER === "Chromium" &&
@@ -1346,7 +1346,7 @@ function testUserAgent_BASE_BROWSER(test, pass, miss) {
 }
 
 function testUserAgent_IE(test, pass, miss) {
-    var ua3 = new UserAgent("Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; HTC; Windows Phone 8S by HTC)");
+    var ua3 = UserAgent.parse("Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; HTC; Windows Phone 8S by HTC)");
 
     if (ua3.BASE_BROWSER === "IE" && ua3.IE) {
         test.done(pass());
@@ -1356,7 +1356,7 @@ function testUserAgent_IE(test, pass, miss) {
 }
 
 function testUserAgent_Edge(test, pass, miss) {
-    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+    var ua3 = UserAgent.parse("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
 
     if (ua3.BASE_BROWSER === "Edge" && ua3.Edge) {
         test.done(pass());
@@ -1366,7 +1366,7 @@ function testUserAgent_Edge(test, pass, miss) {
 }
 
 function testUserAgent_WebKit(test, pass, miss) {
-    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua1 = UserAgent.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
 
     if (ua1.BASE_BROWSER === "WebKit" && ua1.WebKit) {
         test.done(pass());
@@ -1376,7 +1376,7 @@ function testUserAgent_WebKit(test, pass, miss) {
 }
 
 function testUserAgent_Firefox(test, pass, miss) {
-    var ua1 = new UserAgent("Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0");
+    var ua1 = UserAgent.parse("Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0");
 
     if (ua1.BASE_BROWSER === "Firefox" && ua1.Firefox) {
         test.done(pass());
@@ -1386,7 +1386,7 @@ function testUserAgent_Firefox(test, pass, miss) {
 }
 
 function testUserAgent_Chromium(test, pass, miss) {
-    var ua2 = new UserAgent("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+    var ua2 = UserAgent.parse("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/BuildID) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
 
     if (ua2.BASE_BROWSER === "Chromium" && ua2.Chromium) {
         test.done(pass());
@@ -1396,7 +1396,7 @@ function testUserAgent_Chromium(test, pass, miss) {
 }
 
 function testUserAgent_Safari(test, pass, miss) {
-    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua1 = UserAgent.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
 
     if (ua1["Safari"]) {
         test.done(pass());
@@ -1406,7 +1406,7 @@ function testUserAgent_Safari(test, pass, miss) {
 }
 
 function testUserAgent_BROWSER_ENGINE(test, pass, miss) {
-    var ua3 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+    var ua3 = UserAgent.parse("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
 
     if (ua3.BROWSER_ENGINE === "EdgeHTML" && ua3.Edge) {
         test.done(pass());
@@ -1416,8 +1416,8 @@ function testUserAgent_BROWSER_ENGINE(test, pass, miss) {
 }
 
 function testUserAgent_cache(test, pass, miss) {
-    var ua1 = UserAgent.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
-    var ua2 = UserAgent.parse();
+    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua2 = new UserAgent();
 
     if (ua2["Safari"]) {
         test.done(pass());
