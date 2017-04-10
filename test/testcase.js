@@ -38,6 +38,7 @@ if (IN_BROWSER || IN_NW || IN_EL || IN_WORKER || IN_NODE) {
         testUserAgent_Chromium,
         testUserAgent_Safari,
         testUserAgent_cache,
+        testUserAgent_DISABLE_CACHE,
     ]);
 }
 
@@ -1416,10 +1417,27 @@ function testUserAgent_BROWSER_ENGINE(test, pass, miss) {
 }
 
 function testUserAgent_cache(test, pass, miss) {
+    UserAgent.DISABLE_CACHE = false;
+
     var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
     var ua2 = new UserAgent();
 
     if (ua2["Safari"]) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testUserAgent_DISABLE_CACHE(test, pass, miss) {
+    UserAgent.DISABLE_CACHE = true;
+
+    var ua1 = new UserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25");
+    var ua2 = new UserAgent("Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.123");
+
+    UserAgent.DISABLE_CACHE = false;
+
+    if (ua2.BROWSER_ENGINE === "EdgeHTML" && ua2.Edge) {
         test.done(pass());
     } else {
         test.done(miss());
