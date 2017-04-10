@@ -20,25 +20,46 @@ This module made of [WebModule](https://github.com/uupaa/WebModule).
 <script>
 
 var ua = new UserAgent();
-console.dir(ua);
-</script>
-```
 
-```
-{
-  "OS":             "Mac",
-  "OS_VERSION":     "10.9.5",
-  "BROWSER":        "Chrome",
-  "BROWSER_ENGINE": "Blink",
-  "BROWSER_VERSION": "44.0.2403",
-  "USER_AGENT":     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36",
-  "LANGUAGE":       "en",
-  "WEB_VIEW":       false,
-  "DEVICE":         "",
-  "AOSP":           false,
-  "iOS":            false,
-  "Android":        false,
-}
+ua.OS               // -> "iOS"
+ua.OS_VERSION       // -> "8.1.0"
+ua.PC               // -> false
+ua.MOBILE           // -> true
+ua.BROWSER          // -> "Safari"
+ua.BASE_BROWSER     // -> "WebKit"
+ua.BROWSER_VERSION  // -> "8.0.0"
+ua.USER_AGENT       // -> "Mozilla/5.0 (iPhone; CPU iPhone OS 8_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B411 Safari/600.1.4"
+ua.LANGUAGE         // -> "ja"
+ua.WEB_VIEW         // -> false
+ua.DEVICE           // -> "iPhone 5"
+ua.TOUCH_3D         // -> false
+ua.CARRIER          // -> ""
+ua.FEATURE_PHONE    // -> false
+ua.ES5              // -> true
+ua.ES6              // -> false
+ua.ES2015           // -> false
+// --- OS ---
+ua.iOS              // -> true
+ua.Mac              // -> false
+ua.macOS            // -> false
+ua.Android          // -> false
+ua.Windows          // -> false
+// --- browser ---
+ua.IE               // -> false
+ua.Edge             // -> false
+ua.Firefox          // -> false
+ua.Chrome           // -> false
+ua.Safari           // -> true
+ua.Silk             // -> false
+ua.AOSP             // -> false
+ua.WebKit           // -> true
+ua.Chromium         // -> false
+// --- device ---
+ua.iPod             // -> false
+ua.iPad             // -> false
+ua.iPhone           // -> true
+ua.Kindle           // -> false
+</script>
 ```
 
 ## WebWorkers

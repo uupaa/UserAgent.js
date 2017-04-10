@@ -1,6 +1,6 @@
 {
   "name": "uupaa.useragent.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Detect the OS, Browser and WebView from UserAgent String.",
   "url": "https://github.com/uupaa/UserAgent.js",
   "keywords": ["UserAgent", "WebView", "uupaa", "WebModule"],
@@ -69,9 +69,7 @@
   "dependencies": {
     "uupaa.webgldetector.js": ""
   },
-  "devDependencies": {
-    "uupaa.es.js": ""
-  },
+  "devDependencies": {},
   "lib": "./lib/",
   "main": "./index.js",
   "author": "uupaa",
